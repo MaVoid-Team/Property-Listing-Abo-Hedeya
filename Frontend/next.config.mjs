@@ -4,6 +4,13 @@ const withNextIntl = createNextIntlPlugin('./i18n.ts');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Enable static export for GitHub Pages
+  output: 'export',
+  // Set base path if deploying to a subdirectory (e.g., /repo-name)
+  // Leave empty if deploying to root domain
+  basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
+  // Disable trailing slash for GitHub Pages compatibility
+  trailingSlash: false,
   typescript: {
     ignoreBuildErrors: true,
   },
@@ -15,6 +22,10 @@ const nextConfig = {
         hostname: 'localhost',
         port: '3000',
         pathname: '/rails/active_storage/**',
+      },
+      {
+        protocol: 'https',
+        hostname: '**',
       },
     ],
   },
