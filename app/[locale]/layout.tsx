@@ -7,6 +7,11 @@ import { Navbar } from "@/components/navbar"
 import { LocaleProvider } from "@/components/locale-provider"
 import { locales, type Locale } from "@/i18n"
 
+// Generate static params for all locales (required for static export)
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }))
+}
+
 interface LocaleLayoutProps {
   children: React.ReactNode
   params: Promise<{ locale: string }>
