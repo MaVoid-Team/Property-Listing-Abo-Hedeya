@@ -41,6 +41,11 @@ module Backend
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
+    # Ignore Devise mailers since ActionMailer is not loaded
+    Rails.autoloaders.main.ignore(
+      Gem::Specification.find_by_name("devise").gem_dir + "/app/mailers"
+    )
+
     # Use UUID as default primary key type
     config.generators do |g|
       g.orm :active_record, primary_key_type: :uuid
