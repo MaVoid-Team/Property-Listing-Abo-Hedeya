@@ -1,0 +1,82 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:18-alpine
+    container_name: property_listing_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Ismk7@wscxSpjdbI
+      POSTGRES_DB: property_listing
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./backup:/backup
+    ports:
+      - "5194:5432"
+    networks:
+      - property_network
+
+  # Rails Backend API
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: property_listing_backend
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      RAILS_ENV: production
+      SECRET_KEY_BASE: 68f6d979ec98e02ad97ffc0f60438d30a6002d08dac4a407f09605d5e74d7328f93bf7a4c3c3c1f213445549cf8134a1fe12725304ad217d3063329c33bb33b2
+      DATABASE_URL: postgresql://postgres:Ismk7@wscxSpjdbI@postgres:5432/property_listing
+      RAILS_LOG_TO_STDOUT: true
+      RAILS_SERVE_STATIC_FILES: true
+      PORT: 3000
+      RAILS_MAX_THREADS: 5
+      WEB_CONCURRENCY: 1
+      # JWT/Devise secrets
+      DEVISE_JWT_SECRET_KEY: e66087cbbba212f365121c46f90dc057d1adfbbb550c42f5863eaa6ea71120c3d00c044a35bdba93d97682be08daec78e3871427b3d5ee5dbbcd95eeb78e2906
+      # CORS settings
+      FRONTEND_URL: https://abo-hedeya.mavoid.com
+    volumes:
+      - backend_storage:/rails/storage
+      - backend_logs:/rails/log
+    ports:
+      - "3028:3000"
+    networks:
+      - property_network
+
+  # Next.js Frontend
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_API_URL: https://abo-hedeya.mavoid.com/api
+    container_name: property_listing_frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    environment:
+      NODE_ENV: production
+      NEXT_PUBLIC_API_URL: https://abo-hedeya.mavoid.com/api
+      PORT: 3001
+    ports:
+      - "3029:3001"
+    networks:
+      - property_network
+
+volumes:
+  postgres_data:
+    driver: local
+  backend_storage:
+    driver: local
+  backend_logs:
+    driver: local
+
+networks:
+  property_network:
+    driver: bridge

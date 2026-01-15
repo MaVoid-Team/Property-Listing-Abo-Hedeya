@@ -69,5 +69,6 @@ COPY --chown=rails:rails --from=build /rails /rails
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
 # Start server via Thruster by default, this can be overwritten at runtime
-EXPOSE 80
+# Changed to port 3000 for better compatibility with docker-compose
+EXPOSE 3000
 CMD ["./bin/thrust", "./bin/rails", "server"]

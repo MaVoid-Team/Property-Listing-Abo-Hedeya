@@ -11,6 +11,8 @@ const nextConfig = {
     basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
     trailingSlash: false,
   }),
+  // Enable standalone output for Docker
+  output: process.env.NEXT_PUBLIC_STATIC_EXPORT === 'true' ? 'export' : 'standalone',
   typescript: {
     ignoreBuildErrors: true,
   },
