@@ -26,8 +26,7 @@ services:
     container_name: property_listing_backend
     restart: unless-stopped
     depends_on:
-      postgres:
-        condition: service_healthy
+      - postgres
     environment:
       RAILS_ENV: production
       SECRET_KEY_BASE: 68f6d979ec98e02ad97ffc0f60438d30a6002d08dac4a407f09605d5e74d7328f93bf7a4c3c3c1f213445549cf8134a1fe12725304ad217d3063329c33bb33b2
