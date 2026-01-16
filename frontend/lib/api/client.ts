@@ -68,6 +68,7 @@ export async function apiClient<T = unknown>(
     response = await fetch(url, {
       ...options,
       headers,
+      credentials: 'include', // Required for CORS with credentials
     });
   } catch (networkError) {
     // Network error (CORS, offline, etc.)
@@ -158,17 +159,52 @@ export async function uploadFile(
     headers['Authorization'] = `Bearer ${token}`;
   }
   
-  const response = await fetch(`${API_BASE}${endpoint}`, {
-    method: 'POST',
-    headers,
-    body: formData,
-  });
+  let response: Response;
   
-  if (!response.ok) {
-    const data = await response.json();
-    throw new ApiError(data.error || 'Upload failed', response.status);
+  try {
+    response = await fetch(`${API_BASE}${endpoint}`, {
+      method: 'POST',
+      headers,
+      body: formData,
+      credentials: 'include', // Required for CORS with credentials
+    });
+  } catch (networkError) {
+    throw new ApiError('Network error during upload. Please check your connection.', 0);
   }
   
-  return response.json();
+  // Handle empty responses
+  if (response.status === 204 || response.status === 201) {
+    // Try to parse JSON, but don't fail if empty
+    try {
+      const text = await response.text();
+      if (text) {
+        return JSON.parse(text);
+      }
+      return {};
+    } catch {
+      return {};
+    }
+  }
+  
+  // Parse response
+  let data: unknown;
+  try {
+    data = await response.json();
+  } catch {
+    if (!response.ok) {
+      throw new ApiError(`Upload failed with status ${response.status}`, response.status);
+    }
+    return {};
+  }
+  
+  if (!response.ok) {
+    const errorData = data as Record<string, unknown>;
+    throw new ApiError(
+      (errorData.error as string) || (errorData.errors as string[])?.join(', ') || 'Upload failed', 
+      response.status
+    );
+  }
+  
+  return data;
 }
 

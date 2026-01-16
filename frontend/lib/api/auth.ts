@@ -22,19 +22,26 @@ export interface LoginCredentials {
 export async function login(credentials: LoginCredentials): Promise<LoginResponse> {
   const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
   
-  const response = await fetch(`${API_BASE}/api/v1/login`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-    },
-    body: JSON.stringify({
-      admin_user: {
-        email: credentials.email,
-        password: credentials.password,
+  let response: Response;
+  
+  try {
+    response = await fetch(`${API_BASE}/api/v1/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
       },
-    }),
-  });
+      credentials: 'include',
+      body: JSON.stringify({
+        admin_user: {
+          email: credentials.email,
+          password: credentials.password,
+        },
+      }),
+    });
+  } catch (networkError) {
+    throw new ApiError('Network error. Please check your connection.', 0);
+  }
   
   // Get JWT token from Authorization header
   const authHeader = response.headers.get('Authorization');
@@ -48,7 +55,16 @@ export async function login(credentials: LoginCredentials): Promise<LoginRespons
     }
   }
   
-  const data = await response.json();
+  let data: LoginResponse;
+  try {
+    data = await response.json();
+  } catch (parseError) {
+    if (!response.ok) {
+      throw new ApiError(`Login failed with status ${response.status}`, response.status);
+    }
+    // Unexpected - login succeeded but no JSON response
+    throw new ApiError('Invalid response from server', response.status);
+  }
   
   if (!response.ok) {
     throw new ApiError(data.message || 'Login failed', response.status);
