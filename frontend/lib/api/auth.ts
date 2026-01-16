@@ -31,7 +31,6 @@ export async function login(credentials: LoginCredentials): Promise<LoginRespons
         'Content-Type': 'application/json',
         'Accept': 'application/json',
       },
-      credentials: 'include',
       body: JSON.stringify({
         admin_user: {
           email: credentials.email,
@@ -40,6 +39,7 @@ export async function login(credentials: LoginCredentials): Promise<LoginRespons
       }),
     });
   } catch (networkError) {
+    console.error('Login network error:', networkError);
     throw new ApiError('Network error. Please check your connection.', 0);
   }
   

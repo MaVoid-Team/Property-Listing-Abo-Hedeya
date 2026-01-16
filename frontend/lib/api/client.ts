@@ -68,10 +68,10 @@ export async function apiClient<T = unknown>(
     response = await fetch(url, {
       ...options,
       headers,
-      credentials: 'include', // Required for CORS with credentials
     });
   } catch (networkError) {
     // Network error (CORS, offline, etc.)
+    console.error('Network error:', networkError);
     throw new ApiError('Network error. Please check your connection.', 0);
   }
   
@@ -166,45 +166,32 @@ export async function uploadFile(
       method: 'POST',
       headers,
       body: formData,
-      credentials: 'include', // Required for CORS with credentials
     });
   } catch (networkError) {
+    console.error('Upload network error:', networkError);
     throw new ApiError('Network error during upload. Please check your connection.', 0);
   }
   
-  // Handle empty responses
-  if (response.status === 204 || response.status === 201) {
-    // Try to parse JSON, but don't fail if empty
+  // For successful responses (2xx), try to parse JSON
+  if (response.ok) {
     try {
-      const text = await response.text();
-      if (text) {
-        return JSON.parse(text);
-      }
-      return {};
+      return await response.json();
     } catch {
+      // No JSON body or empty response - that's okay for success
       return {};
     }
   }
   
-  // Parse response
-  let data: unknown;
+  // For error responses, try to get error message from body
   try {
-    data = await response.json();
-  } catch {
-    if (!response.ok) {
-      throw new ApiError(`Upload failed with status ${response.status}`, response.status);
-    }
-    return {};
-  }
-  
-  if (!response.ok) {
-    const errorData = data as Record<string, unknown>;
+    const errorData = await response.json() as Record<string, unknown>;
     throw new ApiError(
       (errorData.error as string) || (errorData.errors as string[])?.join(', ') || 'Upload failed', 
       response.status
     );
+  } catch (e) {
+    if (e instanceof ApiError) throw e;
+    throw new ApiError(`Upload failed with status ${response.status}`, response.status);
   }
-  
-  return data;
 }
 

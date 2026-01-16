@@ -89,11 +89,13 @@ export default function ListPropertyPage() {
 
       router.push(`/${locale}/properties/${propertyId}`)
     } catch (err) {
+      console.error('Property creation error:', err)
       if (err instanceof ApiError) {
         setError(err.message)
+      } else if (err instanceof Error) {
+        setError(err.message || "An error occurred. Please try again.")
       } else {
         setError("An error occurred. Please try again.")
-        console.error(err)
       }
     } finally {
       setLoading(false)

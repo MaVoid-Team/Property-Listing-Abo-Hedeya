@@ -28,7 +28,8 @@ export function AdminPropertyList({ properties, onPropertyDeleted }: AdminProper
       onPropertyDeleted()
     } catch (error) {
       console.error("Error deleting property:", error)
-      alert("Failed to delete property. Please try again.")
+      const message = error instanceof Error ? error.message : "Unknown error"
+      alert(`Failed to delete property: ${message}`)
     } finally {
       setDeleting(null)
     }
