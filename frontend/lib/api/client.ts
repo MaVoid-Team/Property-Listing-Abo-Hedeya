@@ -62,10 +62,17 @@ export async function apiClient<T = unknown>(
   
   const url = `${API_BASE}${endpoint}`;
   
-  const response = await fetch(url, {
-    ...options,
-    headers,
-  });
+  let response: Response;
+  
+  try {
+    response = await fetch(url, {
+      ...options,
+      headers,
+    });
+  } catch (networkError) {
+    // Network error (CORS, offline, etc.)
+    throw new ApiError('Network error. Please check your connection.', 0);
+  }
   
   // Handle JWT token from response header (for login)
   const authHeader = response.headers.get('Authorization');
@@ -79,14 +86,28 @@ export async function apiClient<T = unknown>(
     return {} as T;
   }
   
-  const data = await response.json();
+  // Parse JSON response with error handling
+  let data: T;
+  try {
+    data = await response.json();
+  } catch (parseError) {
+    // Response is not valid JSON
+    if (!response.ok) {
+      throw new ApiError(`Request failed with status ${response.status}`, response.status);
+    }
+    // Successful response but empty/invalid body - return empty object
+    return {} as T;
+  }
   
   if (!response.ok) {
-    const errorMessage = data.error || data.errors?.join(', ') || data.message || 'An error occurred';
+    const errorMessage = (data as Record<string, unknown>).error as string || 
+      ((data as Record<string, unknown>).errors as string[])?.join(', ') || 
+      (data as Record<string, unknown>).message as string || 
+      'An error occurred';
     throw new ApiError(errorMessage, response.status);
   }
   
-  return data as T;
+  return data;
 }
 
 // Convenience methods
