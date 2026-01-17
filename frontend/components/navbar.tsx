@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { Home, Search, Plus, Mail } from "lucide-react"
+import { Home, Search, Mail } from "lucide-react"
 import { usePathname } from "next/navigation"
 import { useLocale, useTranslations } from "next-intl"
 import { LanguageSwitcher } from "./language-switcher"
@@ -36,27 +36,24 @@ export function Navbar() {
         <div className="hidden md:flex items-center gap-8">
           <Link
             href={localizedHref("/")}
-            className={`flex items-center gap-2 transition ${
-              isActive("/") ? "text-primary" : "text-muted-foreground hover:text-foreground"
-            }`}
+            className={`flex items-center gap-2 transition ${isActive("/") ? "text-primary" : "text-muted-foreground hover:text-foreground"
+              }`}
           >
             <Home className="w-4 h-4" />
             {t("home")}
           </Link>
           <Link
             href={localizedHref("/properties")}
-            className={`flex items-center gap-2 transition ${
-              isActive("/properties") ? "text-primary" : "text-muted-foreground hover:text-foreground"
-            }`}
+            className={`flex items-center gap-2 transition ${isActive("/properties") ? "text-primary" : "text-muted-foreground hover:text-foreground"
+              }`}
           >
             <Search className="w-4 h-4" />
             {t("properties")}
           </Link>
           <Link
             href={localizedHref("/contact")}
-            className={`flex items-center gap-2 transition ${
-              isActive("/contact") ? "text-primary" : "text-muted-foreground hover:text-foreground"
-            }`}
+            className={`flex items-center gap-2 transition ${isActive("/contact") ? "text-primary" : "text-muted-foreground hover:text-foreground"
+              }`}
           >
             <Mail className="w-4 h-4" />
             {t("contact")}
@@ -66,13 +63,6 @@ export function Navbar() {
         {/* CTA Buttons & Language Switcher */}
         <div className="flex items-center gap-3">
           <LanguageSwitcher />
-          <Link
-            href={localizedHref("/list-property")}
-            className="hidden sm:flex items-center gap-2 px-4 py-2 border border-primary text-primary rounded-lg hover:bg-primary/5 transition font-semibold"
-          >
-            <Plus className="w-4 h-4" />
-            <span className="hidden sm:inline">{t("listProperty")}</span>
-          </Link>
           <Link
             href={localizedHref("/admin-login")}
             className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition font-semibold text-sm sm:text-base"

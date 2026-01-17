@@ -9,7 +9,7 @@ export interface ApiResponse<T = unknown> {
 
 export class ApiError extends Error {
   status: number;
-  
+
   constructor(message: string, status: number) {
     super(message);
     this.status = status;
@@ -44,49 +44,66 @@ export function isAuthenticated(): boolean {
 }
 
 // Main API client function
+// Default timeout of 60 seconds for mutation operations
+const DEFAULT_TIMEOUT = 60000;
+
 export async function apiClient<T = unknown>(
   endpoint: string,
-  options: RequestInit = {}
+  options: RequestInit = {},
+  timeout: number = DEFAULT_TIMEOUT
 ): Promise<T> {
   const token = getAuthToken();
-  
+
   const headers: HeadersInit = {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
     ...options.headers,
   };
-  
+
   if (token) {
     (headers as Record<string, string>)['Authorization'] = `Bearer ${token}`;
   }
-  
+
   const url = `${API_BASE}${endpoint}`;
-  
+
+  // Create AbortController for timeout
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), timeout);
+
   let response: Response;
-  
+
   try {
     response = await fetch(url, {
       ...options,
       headers,
+      signal: controller.signal,
     });
   } catch (networkError) {
+    clearTimeout(timeoutId);
+    // Check if it's a timeout error
+    if (networkError instanceof Error && networkError.name === 'AbortError') {
+      console.error('Request timeout:', endpoint);
+      throw new ApiError('Request timed out. Please try again.', 408);
+    }
     // Network error (CORS, offline, etc.)
     console.error('Network error:', networkError);
     throw new ApiError('Network error. Please check your connection.', 0);
   }
-  
+
+  clearTimeout(timeoutId);
+
   // Handle JWT token from response header (for login)
   const authHeader = response.headers.get('Authorization');
   if (authHeader && authHeader.startsWith('Bearer ')) {
     const newToken = authHeader.replace('Bearer ', '');
     setAuthToken(newToken);
   }
-  
+
   // Handle empty responses (204 No Content)
   if (response.status === 204) {
     return {} as T;
   }
-  
+
   // Parse JSON response with error handling
   let data: T;
   try {
@@ -99,46 +116,49 @@ export async function apiClient<T = unknown>(
     // Successful response but empty/invalid body - return empty object
     return {} as T;
   }
-  
+
   if (!response.ok) {
-    const errorMessage = (data as Record<string, unknown>).error as string || 
-      ((data as Record<string, unknown>).errors as string[])?.join(', ') || 
-      (data as Record<string, unknown>).message as string || 
+    const errorMessage = (data as Record<string, unknown>).error as string ||
+      ((data as Record<string, unknown>).errors as string[])?.join(', ') ||
+      (data as Record<string, unknown>).message as string ||
       'An error occurred';
     throw new ApiError(errorMessage, response.status);
   }
-  
+
   return data;
 }
 
 // Convenience methods
 export const api = {
-  get: <T = unknown>(endpoint: string) => 
+  get: <T = unknown>(endpoint: string) =>
     apiClient<T>(endpoint, { method: 'GET' }),
-  
+
   post: <T = unknown>(endpoint: string, body?: unknown) =>
     apiClient<T>(endpoint, {
       method: 'POST',
       body: body ? JSON.stringify(body) : undefined,
     }),
-  
+
   put: <T = unknown>(endpoint: string, body?: unknown) =>
     apiClient<T>(endpoint, {
       method: 'PUT',
       body: body ? JSON.stringify(body) : undefined,
     }),
-  
+
   patch: <T = unknown>(endpoint: string, body?: unknown) =>
     apiClient<T>(endpoint, {
       method: 'PATCH',
       body: body ? JSON.stringify(body) : undefined,
     }),
-  
+
   delete: <T = unknown>(endpoint: string) =>
     apiClient<T>(endpoint, { method: 'DELETE' }),
 };
 
 // Upload file with multipart form data
+// Use 120 second timeout for file uploads as they can be slower
+const UPLOAD_TIMEOUT = 120000;
+
 export async function uploadFile(
   endpoint: string,
   file: File,
@@ -147,31 +167,44 @@ export async function uploadFile(
   const token = getAuthToken();
   const formData = new FormData();
   formData.append('image', file);
-  
+
   if (additionalFields) {
     Object.entries(additionalFields).forEach(([key, value]) => {
       formData.append(key, value);
     });
   }
-  
+
   const headers: HeadersInit = {};
   if (token) {
     headers['Authorization'] = `Bearer ${token}`;
   }
-  
+
+  // Create AbortController for timeout
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), UPLOAD_TIMEOUT);
+
   let response: Response;
-  
+
   try {
     response = await fetch(`${API_BASE}${endpoint}`, {
       method: 'POST',
       headers,
       body: formData,
+      signal: controller.signal,
     });
   } catch (networkError) {
+    clearTimeout(timeoutId);
+    // Check if it's a timeout error
+    if (networkError instanceof Error && networkError.name === 'AbortError') {
+      console.error('Upload timeout:', endpoint);
+      throw new ApiError('Upload timed out. Please try again with a smaller file.', 408);
+    }
     console.error('Upload network error:', networkError);
     throw new ApiError('Network error during upload. Please check your connection.', 0);
   }
-  
+
+  clearTimeout(timeoutId);
+
   // For successful responses (2xx), try to parse JSON
   if (response.ok) {
     try {
@@ -181,12 +214,12 @@ export async function uploadFile(
       return {};
     }
   }
-  
+
   // For error responses, try to get error message from body
   try {
     const errorData = await response.json() as Record<string, unknown>;
     throw new ApiError(
-      (errorData.error as string) || (errorData.errors as string[])?.join(', ') || 'Upload failed', 
+      (errorData.error as string) || (errorData.errors as string[])?.join(', ') || 'Upload failed',
       response.status
     );
   } catch (e) {
