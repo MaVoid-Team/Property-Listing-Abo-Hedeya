@@ -7,8 +7,8 @@ class PropertyImageSerializer < ActiveModel::Serializer
 
   def image_url
     if object.image.attached?
-      host = Rails.application.routes.default_url_options[:host] || 'localhost:3000'
-      rails_blob_url(object.image, host: host)
+      blob_url_options = Rails.application.routes.default_url_options || { host: 'localhost', port: 3000 }
+      rails_blob_url(object.image, **blob_url_options)
     else
       object.image_url
     end
@@ -16,8 +16,8 @@ class PropertyImageSerializer < ActiveModel::Serializer
 
   def blob_url
     if object.image.attached?
-      host = Rails.application.routes.default_url_options[:host] || 'localhost:3000'
-      rails_blob_url(object.image, host: host)
+      blob_url_options = Rails.application.routes.default_url_options || { host: 'localhost', port: 3000 }
+      rails_blob_url(object.image, **blob_url_options)
     else
       object.blob_url
     end
