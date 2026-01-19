@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       # Authentication - custom routes for JWT
       post 'login', to: 'sessions#create'
-      delete 'logout', to: 'sessions#destroy'
+      post 'logout', to: 'sessions#destroy'
 
       # Properties
       resources :properties do

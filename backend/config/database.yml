@@ -68,7 +68,15 @@ test:
 production:
   primary: &primary_production
     <<: *default
-    url: <%= ENV.fetch("DATABASE_URL") %>
+    <% if ENV["DATABASE_URL"] %>
+    url: <%= ENV["DATABASE_URL"] %>
+    <% else %>
+    database: property_listing_production
+    username: <%= ENV.fetch("DB_USERNAME", ENV["USER"]) %>
+    password: <%= ENV.fetch("DB_PASSWORD", "") %>
+    host: <%= ENV.fetch("DB_HOST", "localhost") %>
+    port: <%= ENV.fetch("DB_PORT", 5432) %>
+    <% end %>
   cache:
     <<: *primary_production
     database: <%= ENV.fetch("POSTGRES_DB", "property_listing") %>_cache
