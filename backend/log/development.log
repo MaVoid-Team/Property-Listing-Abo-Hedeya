@@ -1591,3 +1591,480 @@ Processing by Rails::WelcomeController#index as */*
 Completed 200 OK in 32ms (Views: 9.0ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
 
 
+Started POST "/api/v1/logout" for 127.0.0.1 at 2026-01-20 18:20:49 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (1.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+Processing by Api::V1::SessionsController#destroy as */*
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.08ms)
+Filter chain halted as :verify_signed_out_user rendered or redirected
+Completed 200 OK in 4ms (Views: 2.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/api/v1/login" for 127.0.0.1 at 2026-01-20 18:20:52 +0200
+Processing by Api::V1::SessionsController#create as */*
+  Parameters: {"admin_user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}, "session"=>{"admin_user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}}
+  [1m[36mAdminUser Load (6.5ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."email" = 'admin@propertylistings.com' ORDER BY "admin_users"."created_at" ASC, "admin_users"."id" ASC LIMIT 1 /*action='create',application='Backend',controller='sessions'*/[0m
+  ↳ app/controllers/api/v1/sessions_controller.rb:10:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.04ms)
+Completed 200 OK in 313ms (Views: 0.6ms | ActiveRecord: 42.8ms (1 query, 0 cached) | GC: 2.6ms)
+
+
+Started GET "/api/v1/properties" for 127.0.0.1 at 2026-01-20 18:21:52 +0200
+Processing by Api::V1::PropertiesController#index as */*
+  [1m[36mProperty Load (9.3ms)[0m  [1m[34mSELECT "properties".* FROM "properties" ORDER BY "properties"."created_at" DESC /*action='index',application='Backend',controller='properties'*/[0m
+  ↳ app/controllers/api/v1/properties_controller.rb:22:in `index'
+  [1m[36mPropertyImage Load (3.6ms)[0m  [1m[34mSELECT "property_images".* FROM "property_images" WHERE "property_images"."property_id" IN ('b6274c30-6078-4122-a214-0a9f58e793cb', '420a9095-2d20-4b16-92af-849ea51fe455', '7f26fb32-4133-4492-9b40-2f97461dec83', 'e7c1f5e8-3a00-405d-85f5-78f31f56b00a', '121c7b3a-a2ab-4501-9a9f-4871f1e6b1ce', '7e029baa-78f7-478e-9128-8545b75c8c1c', '7e80251b-1be4-4b88-80c7-e7a595ecde54') /*action='index',application='Backend',controller='properties'*/[0m
+  ↳ app/controllers/api/v1/properties_controller.rb:22:in `index'
+[active_model_serializers]   [1m[36mActiveStorage::Attachment Load (4.7ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = 'b07cd697-a36c-4bf5-8e7c-d812e7b07305' AND "active_storage_attachments"."record_type" = 'PropertyImage' AND "active_storage_attachments"."name" = 'image' LIMIT 1 /*action='index',application='Backend',controller='properties'*/[0m
+[active_model_serializers]   ↳ app/serializers/property_image_serializer.rb:9:in `image_url'
+[active_model_serializers]   [1m[36mActiveStorage::Blob Load (3.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = '19fa5af7-ff77-41b5-a1b9-a18f5306a5bc' LIMIT 1 /*action='index',application='Backend',controller='properties'*/[0m
+[active_model_serializers]   ↳ app/serializers/property_image_serializer.rb:11:in `image_url'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (63.81ms)
+Completed 200 OK in 201ms (Views: 144.2ms | ActiveRecord: 35.5ms (4 queries, 0 cached) | GC: 2.0ms)
+
+
+Started GET "/api/v1/properties/1" for 127.0.0.1 at 2026-01-20 18:23:14 +0200
+Processing by Api::V1::PropertiesController#show as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mProperty Load (0.7ms)[0m  [1m[34mSELECT "properties".* FROM "properties" WHERE "properties"."id" = NULL LIMIT 1 /*action='show',application='Backend',controller='properties'*/[0m
+  ↳ app/controllers/api/v1/properties_controller.rb:83:in `set_property'
+rescue_from handled ActiveRecord::RecordNotFound (Couldn't find Property with 'id'="1") - /home/nerdawy/.rbenv/versions/3.2.6/lib/ruby/gems/3.2.0/gems/activerecord-8.1.2/lib/active_record/core.rb:279:in `find'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.05ms)
+Completed 404 Not Found in 4ms (Views: 0.6ms | ActiveRecord: 0.7ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/properties/b6274c30-6078-4122-a214-0a9f58e793cb" for 127.0.0.1 at 2026-01-20 18:23:32 +0200
+Processing by Api::V1::PropertiesController#show as */*
+  Parameters: {"id"=>"b6274c30-6078-4122-a214-0a9f58e793cb"}
+  [1m[36mProperty Load (0.8ms)[0m  [1m[34mSELECT "properties".* FROM "properties" WHERE "properties"."id" = 'b6274c30-6078-4122-a214-0a9f58e793cb' LIMIT 1 /*action='show',application='Backend',controller='properties'*/[0m
+  ↳ app/controllers/api/v1/properties_controller.rb:83:in `set_property'
+[active_model_serializers]   [1m[36mPropertyImage Load (0.6ms)[0m  [1m[34mSELECT "property_images".* FROM "property_images" WHERE "property_images"."property_id" = 'b6274c30-6078-4122-a214-0a9f58e793cb' /*action='show',application='Backend',controller='properties'*/[0m
+[active_model_serializers]   ↳ app/controllers/api/v1/properties_controller.rb:27:in `show'
+[active_model_serializers] Rendered PropertySerializer with ActiveModelSerializers::Adapter::Attributes (5.27ms)
+Completed 200 OK in 9ms (Views: 5.6ms | ActiveRecord: 1.3ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/api/v1/properties" for 127.0.0.1 at 2026-01-20 18:24:26 +0200
+Processing by Api::V1::PropertiesController#create as */*
+  Parameters: {"property"=>{"title"=>"Beautiful Modern House", "description"=>"Spacious 3-bedroom house with modern amenities", "address"=>"123 Main Street, Downtown", "price"=>350000, "bedrooms"=>3, "bathrooms"=>2, "area"=>2000, "property_type"=>"house", "status"=>"available", "featured"=>true, "category_id"=>nil}}
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2026-01-20 18:24:26 +0200
+Processing by Rails::WelcomeController#index as */*
+  Rendering /home/nerdawy/.rbenv/versions/3.2.6/lib/ruby/gems/3.2.0/gems/railties-8.1.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/nerdawy/.rbenv/versions/3.2.6/lib/ruby/gems/3.2.0/gems/railties-8.1.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 1.1ms | GC: 0.0ms)
+Completed 200 OK in 19ms (Views: 8.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/api/v1/login" for ::1 at 2026-01-20 18:29:40 +0200
+Processing by Api::V1::SessionsController#create as */*
+  Parameters: {"admin_user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}, "session"=>{"admin_user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}}
+  [1m[36mAdminUser Load (1.2ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."email" = 'admin@propertylistings.com' ORDER BY "admin_users"."created_at" ASC, "admin_users"."id" ASC LIMIT 1 /*action='create',application='Backend',controller='sessions'*/[0m
+  ↳ app/controllers/api/v1/sessions_controller.rb:10:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.12ms)
+Completed 200 OK in 220ms (Views: 1.2ms | ActiveRecord: 7.6ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/api/v1/properties" for ::1 at 2026-01-20 18:29:49 +0200
+Processing by Api::V1::PropertiesController#create as */*
+  Parameters: {"property"=>{"title"=>"Beautiful Modern House", "description"=>"Spacious 3-bedroom house with modern amenities", "address"=>"123 Main Street, Downtown", "price"=>350000, "bedrooms"=>3, "bathrooms"=>2, "area"=>2000, "property_type"=>"house", "status"=>"available", "featured"=>true, "category_id"=>nil}}
+Completed 401 Unauthorized in 0ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for ::1 at 2026-01-20 18:29:49 +0200
+Processing by Rails::WelcomeController#index as */*
+  Rendering /home/nerdawy/.rbenv/versions/3.2.6/lib/ruby/gems/3.2.0/gems/railties-8.1.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/nerdawy/.rbenv/versions/3.2.6/lib/ruby/gems/3.2.0/gems/railties-8.1.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 0.1ms | GC: 0.0ms)
+Completed 200 OK in 1ms (Views: 0.9ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/api/v1/properties" for ::1 at 2026-01-20 18:30:11 +0200
+Processing by Api::V1::PropertiesController#create as */*
+  Parameters: {"property"=>{"title"=>"Beautiful Modern House", "description"=>"Spacious 3-bedroom house with modern amenities", "address"=>"123 Main Street, Downtown", "price"=>350000, "bedrooms"=>3, "bathrooms"=>2, "area"=>2000, "property_type"=>"house", "status"=>"available", "featured"=>true, "category_id"=>nil}}
+  [1m[36mAdminUser Load (1.5ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = '2486b80d-39f1-4e2f-ba13-95aa7ca86e3b' LIMIT 1 /*action='create',application='Backend',controller='properties'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*action='create',application='Backend',controller='properties'*/[0m
+  ↳ app/controllers/api/v1/properties_controller.rb:35:in `create'
+  [1m[36mProperty Create (16.7ms)[0m  [1m[32mINSERT INTO "properties" ("title", "description", "address", "price", "bedrooms", "bathrooms", "area", "property_type", "status", "featured", "admin_user_id", "category_id", "created_at", "updated_at") VALUES ('Beautiful Modern House', 'Spacious 3-bedroom house with modern amenities', '123 Main Street, Downtown', 350000.0, 3, 2, 2000.0, 'house', 'available', TRUE, '2486b80d-39f1-4e2f-ba13-95aa7ca86e3b', NULL, '2026-01-20 16:30:11.498901', '2026-01-20 16:30:11.498901') RETURNING "id" /*action='create',application='Backend',controller='properties'*/[0m
+  ↳ app/controllers/api/v1/properties_controller.rb:35:in `create'
+  [1m[36mTRANSACTION (5.1ms)[0m  [1m[35mCOMMIT /*action='create',application='Backend',controller='properties'*/[0m
+  ↳ app/controllers/api/v1/properties_controller.rb:35:in `create'
+[active_model_serializers]   [1m[36mPropertyImage Load (1.8ms)[0m  [1m[34mSELECT "property_images".* FROM "property_images" WHERE "property_images"."property_id" = '9380d041-bfce-4183-97ec-580bb8c8e9a4' /*action='create',application='Backend',controller='properties'*/[0m
+[active_model_serializers]   ↳ app/controllers/api/v1/properties_controller.rb:36:in `create'
+[active_model_serializers] Rendered PropertySerializer with ActiveModelSerializers::Adapter::Attributes (6.22ms)
+Completed 201 Created in 42ms (Views: 5.0ms | ActiveRecord: 25.5ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/api/v1/login" for ::1 at 2026-01-20 18:31:36 +0200
+Processing by Api::V1::SessionsController#create as */*
+  Parameters: {"admin_user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}, "session"=>{"admin_user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}}
+  [1m[36mAdminUser Load (0.7ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."email" = 'admin@propertylistings.com' ORDER BY "admin_users"."created_at" ASC, "admin_users"."id" ASC LIMIT 1 /*action='create',application='Backend',controller='sessions'*/[0m
+  ↳ app/controllers/api/v1/sessions_controller.rb:10:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.06ms)
+Completed 200 OK in 198ms (Views: 0.9ms | ActiveRecord: 0.7ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/api/v1/properties" for ::1 at 2026-01-20 18:32:03 +0200
+Processing by Api::V1::PropertiesController#create as */*
+  Parameters: {"property"=>{"title"=>"Beautiful Modern House", "description"=>"Spacious 3-bedroom house with modern amenities", "address"=>"123 Main Street, Downtown", "price"=>350000, "bedrooms"=>3, "bathrooms"=>2, "area"=>2000, "property_type"=>"house", "status"=>"available", "featured"=>true, "category_id"=>nil}}
+  [1m[36mAdminUser Load (0.6ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = '2486b80d-39f1-4e2f-ba13-95aa7ca86e3b' LIMIT 1 /*action='create',application='Backend',controller='properties'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*action='create',application='Backend',controller='properties'*/[0m
+  ↳ app/controllers/api/v1/properties_controller.rb:35:in `create'
+  [1m[36mProperty Create (3.4ms)[0m  [1m[32mINSERT INTO "properties" ("title", "description", "address", "price", "bedrooms", "bathrooms", "area", "property_type", "status", "featured", "admin_user_id", "category_id", "created_at", "updated_at") VALUES ('Beautiful Modern House', 'Spacious 3-bedroom house with modern amenities', '123 Main Street, Downtown', 350000.0, 3, 2, 2000.0, 'house', 'available', TRUE, '2486b80d-39f1-4e2f-ba13-95aa7ca86e3b', NULL, '2026-01-20 16:32:03.693397', '2026-01-20 16:32:03.693397') RETURNING "id" /*action='create',application='Backend',controller='properties'*/[0m
+  ↳ app/controllers/api/v1/properties_controller.rb:35:in `create'
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT /*action='create',application='Backend',controller='properties'*/[0m
+  ↳ app/controllers/api/v1/properties_controller.rb:35:in `create'
+[active_model_serializers]   [1m[36mPropertyImage Load (0.5ms)[0m  [1m[34mSELECT "property_images".* FROM "property_images" WHERE "property_images"."property_id" = '6fa299a7-557e-4263-861e-7e7b06468ebf' /*action='create',application='Backend',controller='properties'*/[0m
+[active_model_serializers]   ↳ app/controllers/api/v1/properties_controller.rb:36:in `create'
+[active_model_serializers] Rendered PropertySerializer with ActiveModelSerializers::Adapter::Attributes (4.06ms)
+Completed 201 Created in 17ms (Views: 4.8ms | ActiveRecord: 5.2ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/api/v1/logout" for ::1 at 2026-01-20 18:32:07 +0200
+Processing by Api::V1::SessionsController#destroy as */*
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.04ms)
+Filter chain halted as :verify_signed_out_user rendered or redirected
+Completed 200 OK in 1ms (Views: 0.6ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mAdminUser Load (0.4ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = '2486b80d-39f1-4e2f-ba13-95aa7ca86e3b' LIMIT 1 /*action='destroy',application='Backend',controller='sessions'*/[0m
+  [1m[36mAdminUser Update (4.2ms)[0m  [1m[33mUPDATE "admin_users" SET "jti" = 'fcd32017-4c70-4553-a409-3cd1bc70fcb2' WHERE "admin_users"."id" = '2486b80d-39f1-4e2f-ba13-95aa7ca86e3b' /*action='destroy',application='Backend',controller='sessions'*/[0m
+Started POST "/api/v1/login" for ::1 at 2026-01-20 18:32:10 +0200
+Processing by Api::V1::SessionsController#create as */*
+  Parameters: {"admin_user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}, "session"=>{"admin_user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}}
+  [1m[36mAdminUser Load (0.6ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."email" = 'admin@propertylistings.com' ORDER BY "admin_users"."created_at" ASC, "admin_users"."id" ASC LIMIT 1 /*action='create',application='Backend',controller='sessions'*/[0m
+  ↳ app/controllers/api/v1/sessions_controller.rb:10:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.05ms)
+Completed 200 OK in 202ms (Views: 0.6ms | ActiveRecord: 0.6ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/api/v1/properties" for ::1 at 2026-01-20 18:32:22 +0200
+Processing by Api::V1::PropertiesController#create as */*
+  Parameters: {"property"=>{"title"=>"Beautiful Modern House", "description"=>"Spacious 3-bedroom house with modern amenities", "address"=>"123 Main Street, Downtown", "price"=>350000, "bedrooms"=>3, "bathrooms"=>2, "area"=>2000, "property_type"=>"house", "status"=>"available", "featured"=>true, "category_id"=>nil}}
+  [1m[36mAdminUser Load (0.6ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = '2486b80d-39f1-4e2f-ba13-95aa7ca86e3b' LIMIT 1 /*action='create',application='Backend',controller='properties'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*action='create',application='Backend',controller='properties'*/[0m
+  ↳ app/controllers/api/v1/properties_controller.rb:35:in `create'
+  [1m[36mProperty Create (1.3ms)[0m  [1m[32mINSERT INTO "properties" ("title", "description", "address", "price", "bedrooms", "bathrooms", "area", "property_type", "status", "featured", "admin_user_id", "category_id", "created_at", "updated_at") VALUES ('Beautiful Modern House', 'Spacious 3-bedroom house with modern amenities', '123 Main Street, Downtown', 350000.0, 3, 2, 2000.0, 'house', 'available', TRUE, '2486b80d-39f1-4e2f-ba13-95aa7ca86e3b', NULL, '2026-01-20 16:32:22.706905', '2026-01-20 16:32:22.706905') RETURNING "id" /*action='create',application='Backend',controller='properties'*/[0m
+  ↳ app/controllers/api/v1/properties_controller.rb:35:in `create'
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT /*action='create',application='Backend',controller='properties'*/[0m
+  ↳ app/controllers/api/v1/properties_controller.rb:35:in `create'
+[active_model_serializers]   [1m[36mPropertyImage Load (0.3ms)[0m  [1m[34mSELECT "property_images".* FROM "property_images" WHERE "property_images"."property_id" = 'd8620e04-ccae-44f2-bbe1-5022465cee18' /*action='create',application='Backend',controller='properties'*/[0m
+[active_model_serializers]   ↳ app/controllers/api/v1/properties_controller.rb:36:in `create'
+[active_model_serializers] Rendered PropertySerializer with ActiveModelSerializers::Adapter::Attributes (3.44ms)
+Completed 201 Created in 12ms (Views: 3.6ms | ActiveRecord: 2.9ms (3 queries, 0 cached) | GC: 0.9ms)
+
+
+Started GET "/api/v1/properties" for ::1 at 2026-01-20 18:32:36 +0200
+Processing by Api::V1::PropertiesController#index as */*
+  [1m[36mProperty Load (1.6ms)[0m  [1m[34mSELECT "properties".* FROM "properties" ORDER BY "properties"."created_at" DESC /*action='index',application='Backend',controller='properties'*/[0m
+  ↳ app/controllers/api/v1/properties_controller.rb:22:in `index'
+  [1m[36mPropertyImage Load (0.8ms)[0m  [1m[34mSELECT "property_images".* FROM "property_images" WHERE "property_images"."property_id" IN ('d8620e04-ccae-44f2-bbe1-5022465cee18', '6fa299a7-557e-4263-861e-7e7b06468ebf', '9380d041-bfce-4183-97ec-580bb8c8e9a4', 'b6274c30-6078-4122-a214-0a9f58e793cb', '420a9095-2d20-4b16-92af-849ea51fe455', '7f26fb32-4133-4492-9b40-2f97461dec83', 'e7c1f5e8-3a00-405d-85f5-78f31f56b00a', '121c7b3a-a2ab-4501-9a9f-4871f1e6b1ce', '7e029baa-78f7-478e-9128-8545b75c8c1c', '7e80251b-1be4-4b88-80c7-e7a595ecde54') /*action='index',application='Backend',controller='properties'*/[0m
+  ↳ app/controllers/api/v1/properties_controller.rb:22:in `index'
+[active_model_serializers]   [1m[36mActiveStorage::Attachment Load (0.8ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = 'b07cd697-a36c-4bf5-8e7c-d812e7b07305' AND "active_storage_attachments"."record_type" = 'PropertyImage' AND "active_storage_attachments"."name" = 'image' LIMIT 1 /*action='index',application='Backend',controller='properties'*/[0m
+[active_model_serializers]   ↳ app/serializers/property_image_serializer.rb:9:in `image_url'
+[active_model_serializers]   [1m[36mActiveStorage::Blob Load (0.7ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = '19fa5af7-ff77-41b5-a1b9-a18f5306a5bc' LIMIT 1 /*action='index',application='Backend',controller='properties'*/[0m
+[active_model_serializers]   ↳ app/serializers/property_image_serializer.rb:11:in `image_url'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (13.09ms)
+Completed 200 OK in 21ms (Views: 16.4ms | ActiveRecord: 4.0ms (4 queries, 0 cached) | GC: 0.7ms)
+
+
+Started PATCH "/api/v1/properties/d8620e04-ccae-44f2-bbe1-5022465cee18" for ::1 at 2026-01-20 18:32:49 +0200
+Processing by Api::V1::PropertiesController#update as */*
+  Parameters: {"property"=>{"title"=>"Updated Property Title", "price"=>375000, "status"=>"pending"}, "id"=>"d8620e04-ccae-44f2-bbe1-5022465cee18"}
+  [1m[36mAdminUser Load (0.5ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = '2486b80d-39f1-4e2f-ba13-95aa7ca86e3b' LIMIT 1 /*action='update',application='Backend',controller='properties'*/[0m
+  [1m[36mProperty Load (0.3ms)[0m  [1m[34mSELECT "properties".* FROM "properties" WHERE "properties"."id" = 'd8620e04-ccae-44f2-bbe1-5022465cee18' LIMIT 1 /*action='update',application='Backend',controller='properties'*/[0m
+  ↳ app/controllers/api/v1/properties_controller.rb:83:in `set_property'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*action='update',application='Backend',controller='properties'*/[0m
+  ↳ app/controllers/api/v1/properties_controller.rb:44:in `update'
+  [1m[36mProperty Update (2.0ms)[0m  [1m[33mUPDATE "properties" SET "title" = 'Updated Property Title', "price" = 375000.0, "status" = 'pending', "updated_at" = '2026-01-20 16:32:49.316183' WHERE "properties"."id" = 'd8620e04-ccae-44f2-bbe1-5022465cee18' /*action='update',application='Backend',controller='properties'*/[0m
+  ↳ app/controllers/api/v1/properties_controller.rb:44:in `update'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT /*action='update',application='Backend',controller='properties'*/[0m
+  ↳ app/controllers/api/v1/properties_controller.rb:44:in `update'
+[active_model_serializers]   [1m[36mPropertyImage Load (0.7ms)[0m  [1m[34mSELECT "property_images".* FROM "property_images" WHERE "property_images"."property_id" = 'd8620e04-ccae-44f2-bbe1-5022465cee18' /*action='update',application='Backend',controller='properties'*/[0m
+[active_model_serializers]   ↳ app/controllers/api/v1/properties_controller.rb:45:in `update'
+[active_model_serializers] Rendered PropertySerializer with ActiveModelSerializers::Adapter::Attributes (4.32ms)
+Completed 200 OK in 15ms (Views: 4.1ms | ActiveRecord: 4.1ms (4 queries, 0 cached) | GC: 0.6ms)
+
+
+Started DELETE "/api/v1/properties/d8620e04-ccae-44f2-bbe1-5022465cee18" for ::1 at 2026-01-20 18:32:58 +0200
+Processing by Api::V1::PropertiesController#destroy as */*
+  Parameters: {"id"=>"d8620e04-ccae-44f2-bbe1-5022465cee18"}
+  [1m[36mAdminUser Load (0.7ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = '2486b80d-39f1-4e2f-ba13-95aa7ca86e3b' LIMIT 1 /*action='destroy',application='Backend',controller='properties'*/[0m
+  [1m[36mProperty Load (0.7ms)[0m  [1m[34mSELECT "properties".* FROM "properties" WHERE "properties"."id" = 'd8620e04-ccae-44f2-bbe1-5022465cee18' LIMIT 1 /*action='destroy',application='Backend',controller='properties'*/[0m
+  ↳ app/controllers/api/v1/properties_controller.rb:83:in `set_property'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*action='destroy',application='Backend',controller='properties'*/[0m
+  ↳ app/controllers/api/v1/properties_controller.rb:53:in `destroy'
+  [1m[36mPropertyImage Load (1.5ms)[0m  [1m[34mSELECT "property_images".* FROM "property_images" WHERE "property_images"."property_id" = 'd8620e04-ccae-44f2-bbe1-5022465cee18' /*action='destroy',application='Backend',controller='properties'*/[0m
+  ↳ app/controllers/api/v1/properties_controller.rb:53:in `destroy'
+  [1m[36mInquiry Load (4.7ms)[0m  [1m[34mSELECT "inquiries".* FROM "inquiries" WHERE "inquiries"."property_id" = 'd8620e04-ccae-44f2-bbe1-5022465cee18' /*action='destroy',application='Backend',controller='properties'*/[0m
+  ↳ app/controllers/api/v1/properties_controller.rb:53:in `destroy'
+  [1m[36mProperty Destroy (1.4ms)[0m  [1m[31mDELETE FROM "properties" WHERE "properties"."id" = 'd8620e04-ccae-44f2-bbe1-5022465cee18' /*action='destroy',application='Backend',controller='properties'*/[0m
+  ↳ app/controllers/api/v1/properties_controller.rb:53:in `destroy'
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT /*action='destroy',application='Backend',controller='properties'*/[0m
+  ↳ app/controllers/api/v1/properties_controller.rb:53:in `destroy'
+Completed 204 No Content in 47ms (ActiveRecord: 13.7ms (5 queries, 0 cached) | GC: 0.6ms)
+
+
+Started GET "/api/v1/properties" for ::1 at 2026-01-20 18:33:09 +0200
+Processing by Api::V1::PropertiesController#index as */*
+  [1m[36mProperty Load (0.7ms)[0m  [1m[34mSELECT "properties".* FROM "properties" ORDER BY "properties"."created_at" DESC /*action='index',application='Backend',controller='properties'*/[0m
+  ↳ app/controllers/api/v1/properties_controller.rb:22:in `index'
+  [1m[36mPropertyImage Load (0.5ms)[0m  [1m[34mSELECT "property_images".* FROM "property_images" WHERE "property_images"."property_id" IN ('6fa299a7-557e-4263-861e-7e7b06468ebf', '9380d041-bfce-4183-97ec-580bb8c8e9a4', 'b6274c30-6078-4122-a214-0a9f58e793cb', '420a9095-2d20-4b16-92af-849ea51fe455', '7f26fb32-4133-4492-9b40-2f97461dec83', 'e7c1f5e8-3a00-405d-85f5-78f31f56b00a', '121c7b3a-a2ab-4501-9a9f-4871f1e6b1ce', '7e029baa-78f7-478e-9128-8545b75c8c1c', '7e80251b-1be4-4b88-80c7-e7a595ecde54') /*action='index',application='Backend',controller='properties'*/[0m
+  ↳ app/controllers/api/v1/properties_controller.rb:22:in `index'
+[active_model_serializers]   [1m[36mActiveStorage::Attachment Load (0.6ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = 'b07cd697-a36c-4bf5-8e7c-d812e7b07305' AND "active_storage_attachments"."record_type" = 'PropertyImage' AND "active_storage_attachments"."name" = 'image' LIMIT 1 /*action='index',application='Backend',controller='properties'*/[0m
+[active_model_serializers]   ↳ app/serializers/property_image_serializer.rb:9:in `image_url'
+[active_model_serializers]   [1m[36mActiveStorage::Blob Load (0.4ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = '19fa5af7-ff77-41b5-a1b9-a18f5306a5bc' LIMIT 1 /*action='index',application='Backend',controller='properties'*/[0m
+[active_model_serializers]   ↳ app/serializers/property_image_serializer.rb:11:in `image_url'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (10.75ms)
+Completed 200 OK in 19ms (Views: 16.2ms | ActiveRecord: 2.5ms (4 queries, 0 cached) | GC: 0.8ms)
+
+
+Started GET "/api/v1/properties" for ::1 at 2026-01-20 18:33:11 +0200
+Processing by Api::V1::PropertiesController#index as */*
+  [1m[36mProperty Load (0.5ms)[0m  [1m[34mSELECT "properties".* FROM "properties" ORDER BY "properties"."created_at" DESC /*action='index',application='Backend',controller='properties'*/[0m
+  ↳ app/controllers/api/v1/properties_controller.rb:22:in `index'
+  [1m[36mPropertyImage Load (0.4ms)[0m  [1m[34mSELECT "property_images".* FROM "property_images" WHERE "property_images"."property_id" IN ('6fa299a7-557e-4263-861e-7e7b06468ebf', '9380d041-bfce-4183-97ec-580bb8c8e9a4', 'b6274c30-6078-4122-a214-0a9f58e793cb', '420a9095-2d20-4b16-92af-849ea51fe455', '7f26fb32-4133-4492-9b40-2f97461dec83', 'e7c1f5e8-3a00-405d-85f5-78f31f56b00a', '121c7b3a-a2ab-4501-9a9f-4871f1e6b1ce', '7e029baa-78f7-478e-9128-8545b75c8c1c', '7e80251b-1be4-4b88-80c7-e7a595ecde54') /*action='index',application='Backend',controller='properties'*/[0m
+  ↳ app/controllers/api/v1/properties_controller.rb:22:in `index'
+[active_model_serializers]   [1m[36mActiveStorage::Attachment Load (0.4ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = 'b07cd697-a36c-4bf5-8e7c-d812e7b07305' AND "active_storage_attachments"."record_type" = 'PropertyImage' AND "active_storage_attachments"."name" = 'image' LIMIT 1 /*action='index',application='Backend',controller='properties'*/[0m
+[active_model_serializers]   ↳ app/serializers/property_image_serializer.rb:9:in `image_url'
+[active_model_serializers]   [1m[36mActiveStorage::Blob Load (0.3ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = '19fa5af7-ff77-41b5-a1b9-a18f5306a5bc' LIMIT 1 /*action='index',application='Backend',controller='properties'*/[0m
+[active_model_serializers]   ↳ app/serializers/property_image_serializer.rb:11:in `image_url'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (9.67ms)
+Completed 200 OK in 16ms (Views: 14.1ms | ActiveRecord: 1.6ms (4 queries, 0 cached) | GC: 0.9ms)
+
+
+Started POST "/api/v1/properties/6fa299a7-557e-4263-861e-7e7b06468ebf/images" for ::1 at 2026-01-20 18:33:28 +0200
+Processing by Api::V1::PropertiesController#upload_image as */*
+  Parameters: {"image"=>#<ActionDispatch::Http::UploadedFile:0x000077805e14a428 @tempfile=#<Tempfile:/tmp/RackMultipart20260120-15931-k5v8z6.jpg>, @content_type="image/jpeg", @original_filename="unnamed.jpg", @headers="Content-Disposition: form-data; name=\"image\"; filename=\"unnamed.jpg\"\r\nContent-Type: image/jpeg\r\n">, "is_primary"=>"true", "id"=>"6fa299a7-557e-4263-861e-7e7b06468ebf"}
+  [1m[36mAdminUser Load (2.9ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = '2486b80d-39f1-4e2f-ba13-95aa7ca86e3b' LIMIT 1 /*action='upload_image',application='Backend',controller='properties'*/[0m
+  [1m[36mProperty Load (1.5ms)[0m  [1m[34mSELECT "properties".* FROM "properties" WHERE "properties"."id" = '6fa299a7-557e-4263-861e-7e7b06468ebf' LIMIT 1 /*action='upload_image',application='Backend',controller='properties'*/[0m
+  ↳ app/controllers/api/v1/properties_controller.rb:83:in `set_property'
+  [1m[36mPropertyImage Exists? (2.5ms)[0m  [1m[34mSELECT 1 AS one FROM "property_images" WHERE "property_images"."property_id" = '6fa299a7-557e-4263-861e-7e7b06468ebf' LIMIT 1 /*action='upload_image',application='Backend',controller='properties'*/[0m
+  ↳ app/controllers/api/v1/properties_controller.rb:64:in `upload_image'
+  [1m[36mTRANSACTION (1.9ms)[0m  [1m[35mBEGIN /*action='upload_image',application='Backend',controller='properties'*/[0m
+  ↳ app/controllers/api/v1/properties_controller.rb:68:in `upload_image'
+  [1m[36mPropertyImage Create (4.1ms)[0m  [1m[32mINSERT INTO "property_images" ("property_id", "is_primary", "image_url", "blob_url", "created_at", "updated_at") VALUES ('6fa299a7-557e-4263-861e-7e7b06468ebf', TRUE, NULL, NULL, '2026-01-20 16:33:28.586091', '2026-01-20 16:33:28.586091') RETURNING "id" /*action='upload_image',application='Backend',controller='properties'*/[0m
+  ↳ app/controllers/api/v1/properties_controller.rb:68:in `upload_image'
+  [1m[36mActiveStorage::Attachment Load (2.8ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = 'b3881705-c19d-4aa3-9499-1bc359ea052d' AND "active_storage_attachments"."record_type" = 'PropertyImage' AND "active_storage_attachments"."name" = 'image' LIMIT 1 /*action='upload_image',application='Backend',controller='properties'*/[0m
+  ↳ app/controllers/api/v1/properties_controller.rb:68:in `upload_image'
+  [1m[36mActiveStorage::Blob Create (0.4ms)[0m  [1m[32mINSERT INTO "active_storage_blobs" ("key", "filename", "content_type", "metadata", "service_name", "byte_size", "checksum", "created_at") VALUES ('ebsmzkz78pdgi8wxi6eupd1gftjz', 'unnamed.jpg', 'image/jpeg', '{"identified":true}', 'local', 21425, 'IwJKP9ZkLcegCfANs9N5Iw==', '2026-01-20 16:33:28.598352') RETURNING "id" /*action='upload_image',application='Backend',controller='properties'*/[0m
+  ↳ app/controllers/api/v1/properties_controller.rb:68:in `upload_image'
+  [1m[36mActiveStorage::Attachment Create (0.7ms)[0m  [1m[32mINSERT INTO "active_storage_attachments" ("name", "record_type", "record_id", "blob_id", "created_at") VALUES ('image', 'PropertyImage', 'b3881705-c19d-4aa3-9499-1bc359ea052d', 'f3c247e2-518f-4735-91bd-e617d1fe934a', '2026-01-20 16:33:28.602903') RETURNING "id" /*action='upload_image',application='Backend',controller='properties'*/[0m
+  ↳ app/controllers/api/v1/properties_controller.rb:68:in `upload_image'
+  [1m[36mPropertyImage Update (0.5ms)[0m  [1m[33mUPDATE "property_images" SET "updated_at" = '2026-01-20 16:33:28.605583' WHERE "property_images"."id" = 'b3881705-c19d-4aa3-9499-1bc359ea052d' /*action='upload_image',application='Backend',controller='properties'*/[0m
+  ↳ app/controllers/api/v1/properties_controller.rb:68:in `upload_image'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT /*action='upload_image',application='Backend',controller='properties'*/[0m
+  ↳ app/controllers/api/v1/properties_controller.rb:68:in `upload_image'
+[36m  Disk Storage (1.3ms) [0m[32mUploaded file to key: ebsmzkz78pdgi8wxi6eupd1gftjz (checksum: IwJKP9ZkLcegCfANs9N5Iw==)[0m
+[ActiveJob] Enqueued ActiveStorage::AnalyzeJob (Job ID: 6326b0b8-5013-4d18-8e39-f2440389a418) to Async(default) with arguments: #<GlobalID:0x000077805dfa7fa8 @uri=#<URI::GID gid://backend/ActiveStorage::Blob/f3c247e2-518f-4735-91bd-e617d1fe934a>>
+[ActiveJob] ↳ app/controllers/api/v1/properties_controller.rb:68:in `upload_image'
+  [1m[36mPropertyImage Update All (0.5ms)[0m  [1m[33mUPDATE "property_images" SET "is_primary" = FALSE WHERE "property_images"."property_id" = '6fa299a7-557e-4263-861e-7e7b06468ebf' AND "property_images"."id" != 'b3881705-c19d-4aa3-9499-1bc359ea052d' /*action='upload_image',application='Backend',controller='properties'*/[0m
+  ↳ app/controllers/api/v1/properties_controller.rb:71:in `upload_image'
+[active_model_serializers] Rendered PropertyImageSerializer with ActiveModelSerializers::Adapter::Attributes (1.69ms)
+Completed 201 Created in 98ms (Views: 3.3ms | ActiveRecord: 18.2ms (9 queries, 0 cached) | GC: 2.8ms)
+
+
+[ActiveJob] [ActiveStorage::AnalyzeJob] [6326b0b8-5013-4d18-8e39-f2440389a418]   [1m[36mActiveStorage::Blob Load (1.3ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = 'f3c247e2-518f-4735-91bd-e617d1fe934a' LIMIT 1 /*application='Backend'*/[0m
+[ActiveJob] [ActiveStorage::AnalyzeJob] [6326b0b8-5013-4d18-8e39-f2440389a418] Performing ActiveStorage::AnalyzeJob (Job ID: 6326b0b8-5013-4d18-8e39-f2440389a418) from Async(default) enqueued at 2026-01-20T16:33:28.648735378Z with arguments: #<GlobalID:0x000077805ded76a0 @uri=#<URI::GID gid://backend/ActiveStorage::Blob/f3c247e2-518f-4735-91bd-e617d1fe934a>>
+[ActiveJob] [ActiveStorage::AnalyzeJob] [6326b0b8-5013-4d18-8e39-f2440389a418] Skipping image analysis because the ruby-vips gem isn't installed
+[ActiveJob] [ActiveStorage::AnalyzeJob] [6326b0b8-5013-4d18-8e39-f2440389a418]   [1m[36mTRANSACTION (1.6ms)[0m  [1m[35mBEGIN /*application='Backend',job='ActiveStorage%3A%3AAnalyzeJob'*/[0m
+[ActiveJob] [ActiveStorage::AnalyzeJob] [6326b0b8-5013-4d18-8e39-f2440389a418]   [1m[36mActiveStorage::Blob Update (7.6ms)[0m  [1m[33mUPDATE "active_storage_blobs" SET "metadata" = '{"identified":true,"analyzed":true}' WHERE "active_storage_blobs"."id" = 'f3c247e2-518f-4735-91bd-e617d1fe934a' /*application='Backend',job='ActiveStorage%3A%3AAnalyzeJob'*/[0m
+[ActiveJob] [ActiveStorage::AnalyzeJob] [6326b0b8-5013-4d18-8e39-f2440389a418]   [1m[36mActiveStorage::Attachment Load (0.6ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."blob_id" = 'f3c247e2-518f-4735-91bd-e617d1fe934a' /*application='Backend',job='ActiveStorage%3A%3AAnalyzeJob'*/[0m
+[ActiveJob] [ActiveStorage::AnalyzeJob] [6326b0b8-5013-4d18-8e39-f2440389a418]   [1m[36mPropertyImage Load (0.4ms)[0m  [1m[34mSELECT "property_images".* FROM "property_images" WHERE "property_images"."id" = 'b3881705-c19d-4aa3-9499-1bc359ea052d' /*application='Backend',job='ActiveStorage%3A%3AAnalyzeJob'*/[0m
+[ActiveJob] [ActiveStorage::AnalyzeJob] [6326b0b8-5013-4d18-8e39-f2440389a418]   [1m[36mPropertyImage Update (0.5ms)[0m  [1m[33mUPDATE "property_images" SET "updated_at" = '2026-01-20 16:33:28.692148' WHERE "property_images"."id" = 'b3881705-c19d-4aa3-9499-1bc359ea052d' /*application='Backend',job='ActiveStorage%3A%3AAnalyzeJob'*/[0m
+[ActiveJob] [ActiveStorage::AnalyzeJob] [6326b0b8-5013-4d18-8e39-f2440389a418]   [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT /*application='Backend',job='ActiveStorage%3A%3AAnalyzeJob'*/[0m
+[ActiveJob] [ActiveStorage::AnalyzeJob] [6326b0b8-5013-4d18-8e39-f2440389a418] Performed ActiveStorage::AnalyzeJob (Job ID: 6326b0b8-5013-4d18-8e39-f2440389a418) from Async(default) in 45.95ms
+Started DELETE "/api/v1/property_images/6fa299a7-557e-4263-861e-7e7b06468ebf" for ::1 at 2026-01-20 18:33:39 +0200
+Processing by Api::V1::PropertyImagesController#destroy as */*
+  Parameters: {"id"=>"6fa299a7-557e-4263-861e-7e7b06468ebf"}
+  [1m[36mAdminUser Load (0.8ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = '2486b80d-39f1-4e2f-ba13-95aa7ca86e3b' LIMIT 1 /*action='destroy',application='Backend',controller='property_images'*/[0m
+  [1m[36mPropertyImage Load (0.4ms)[0m  [1m[34mSELECT "property_images".* FROM "property_images" WHERE "property_images"."id" = '6fa299a7-557e-4263-861e-7e7b06468ebf' LIMIT 1 /*action='destroy',application='Backend',controller='property_images'*/[0m
+  ↳ app/controllers/api/v1/property_images_controller.rb:18:in `set_property_image'
+rescue_from handled ActiveRecord::RecordNotFound (Couldn't find PropertyImage with 'id'="6fa299a7-557e-4263-861e-7e7b06468ebf") - /home/nerdawy/.rbenv/versions/3.2.6/lib/ruby/gems/3.2.0/gems/activerecord-8.1.2/lib/active_record/core.rb:279:in `find'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.03ms)
+Completed 404 Not Found in 7ms (Views: 0.8ms | ActiveRecord: 1.2ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started DELETE "/api/v1/property_images/b3881705-c19d-4aa3-9499-1bc359ea052d" for ::1 at 2026-01-20 18:33:58 +0200
+Processing by Api::V1::PropertyImagesController#destroy as */*
+  Parameters: {"id"=>"b3881705-c19d-4aa3-9499-1bc359ea052d"}
+  [1m[36mAdminUser Load (0.7ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = '2486b80d-39f1-4e2f-ba13-95aa7ca86e3b' LIMIT 1 /*action='destroy',application='Backend',controller='property_images'*/[0m
+  [1m[36mPropertyImage Load (0.4ms)[0m  [1m[34mSELECT "property_images".* FROM "property_images" WHERE "property_images"."id" = 'b3881705-c19d-4aa3-9499-1bc359ea052d' LIMIT 1 /*action='destroy',application='Backend',controller='property_images'*/[0m
+  ↳ app/controllers/api/v1/property_images_controller.rb:18:in `set_property_image'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*action='destroy',application='Backend',controller='property_images'*/[0m
+  ↳ app/controllers/api/v1/property_images_controller.rb:11:in `destroy'
+  [1m[36mActiveStorage::Attachment Load (3.5ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = 'b3881705-c19d-4aa3-9499-1bc359ea052d' AND "active_storage_attachments"."record_type" = 'PropertyImage' AND "active_storage_attachments"."name" = 'image' LIMIT 1 /*action='destroy',application='Backend',controller='property_images'*/[0m
+  ↳ app/controllers/api/v1/property_images_controller.rb:11:in `destroy'
+  [1m[36mActiveStorage::Attachment Destroy (0.3ms)[0m  [1m[31mDELETE FROM "active_storage_attachments" WHERE "active_storage_attachments"."id" = '484d81a0-24c1-4da9-820d-ba0ad59bdc7e' /*action='destroy',application='Backend',controller='property_images'*/[0m
+  ↳ app/controllers/api/v1/property_images_controller.rb:11:in `destroy'
+  [1m[36mPropertyImage Destroy (0.2ms)[0m  [1m[31mDELETE FROM "property_images" WHERE "property_images"."id" = 'b3881705-c19d-4aa3-9499-1bc359ea052d' /*action='destroy',application='Backend',controller='property_images'*/[0m
+  ↳ app/controllers/api/v1/property_images_controller.rb:11:in `destroy'
+  [1m[36mActiveStorage::Blob Load (0.7ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = 'f3c247e2-518f-4735-91bd-e617d1fe934a' LIMIT 1 /*action='destroy',application='Backend',controller='property_images'*/[0m
+  ↳ app/models/property_image.rb:36:in `purge_image'
+  [1m[36mActiveStorage::Attachment Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "active_storage_attachments" WHERE "active_storage_attachments"."blob_id" = 'f3c247e2-518f-4735-91bd-e617d1fe934a' LIMIT 1 /*action='destroy',application='Backend',controller='property_images'*/[0m
+  ↳ app/models/property_image.rb:36:in `purge_image'
+  [1m[36mActiveStorage::VariantRecord Load (4.7ms)[0m  [1m[34mSELECT "active_storage_variant_records".* FROM "active_storage_variant_records" WHERE "active_storage_variant_records"."blob_id" = 'f3c247e2-518f-4735-91bd-e617d1fe934a' /*action='destroy',application='Backend',controller='property_images'*/[0m
+  ↳ app/models/property_image.rb:36:in `purge_image'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = 'f3c247e2-518f-4735-91bd-e617d1fe934a' AND "active_storage_attachments"."record_type" = 'ActiveStorage::Blob' AND "active_storage_attachments"."name" = 'preview_image' LIMIT 1 /*action='destroy',application='Backend',controller='property_images'*/[0m
+  ↳ app/models/property_image.rb:36:in `purge_image'
+  [1m[36mActiveStorage::Blob Destroy (0.5ms)[0m  [1m[31mDELETE FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = 'f3c247e2-518f-4735-91bd-e617d1fe934a' /*action='destroy',application='Backend',controller='property_images'*/[0m
+  ↳ app/models/property_image.rb:36:in `purge_image'
+[36m  Disk Storage (0.2ms) [0m[31mDeleted file from key: ebsmzkz78pdgi8wxi6eupd1gftjz[0m
+[36m  Disk Storage (0.1ms) [0m[31mDeleted files by key prefix: variants/ebsmzkz78pdgi8wxi6eupd1gftjz/[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT /*action='destroy',application='Backend',controller='property_images'*/[0m
+  ↳ app/controllers/api/v1/property_images_controller.rb:11:in `destroy'
+[ActiveJob] Enqueued ActiveStorage::PurgeJob (Job ID: 34f15d85-b498-466f-ab99-d8ba9ae04237) to Async(default) with arguments: #<GlobalID:0x000077805f8d3f68 @uri=#<URI::GID gid://backend/ActiveStorage::Blob/f3c247e2-518f-4735-91bd-e617d1fe934a>>
+[ActiveJob] ↳ app/controllers/api/v1/property_images_controller.rb:11:in `destroy'
+Completed 204 No Content in 45ms (ActiveRecord: 14.1ms (10 queries, 0 cached) | GC: 3.0ms)
+
+
+[ActiveJob] [ActiveStorage::PurgeJob] [34f15d85-b498-466f-ab99-d8ba9ae04237]   [1m[36mActiveStorage::Blob Load (1.3ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = 'f3c247e2-518f-4735-91bd-e617d1fe934a' LIMIT 1 /*application='Backend'*/[0m
+[ActiveJob] [ActiveStorage::PurgeJob] [34f15d85-b498-466f-ab99-d8ba9ae04237] Discarded ActiveStorage::PurgeJob (Job ID: 34f15d85-b498-466f-ab99-d8ba9ae04237) due to a ActiveRecord::RecordNotFound (Couldn't find ActiveStorage::Blob with 'id'="f3c247e2-518f-4735-91bd-e617d1fe934a").
+[ActiveJob] [ActiveStorage::PurgeJob] [34f15d85-b498-466f-ab99-d8ba9ae04237] Performed ActiveStorage::PurgeJob (Job ID: 34f15d85-b498-466f-ab99-d8ba9ae04237) from Async(default) in 4.46ms
+Started GET "/api/v1/categories" for ::1 at 2026-01-20 18:34:10 +0200
+Processing by Api::V1::CategoriesController#index as */*
+  [1m[36mCategory Load (4.9ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."name" ASC /*action='index',application='Backend',controller='categories'*/[0m
+  ↳ app/controllers/api/v1/categories_controller.rb:12:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.88ms)
+Completed 200 OK in 11ms (Views: 5.1ms | ActiveRecord: 4.9ms (1 query, 0 cached) | GC: 0.2ms)
+
+
+Started POST "/api/v1/categories" for ::1 at 2026-01-20 18:34:24 +0200
+Processing by Api::V1::CategoriesController#create as */*
+  Parameters: {"category"=>{"name"=>"Residential"}}
+  [1m[36mAdminUser Load (0.4ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = '2486b80d-39f1-4e2f-ba13-95aa7ca86e3b' LIMIT 1 /*action='create',application='Backend',controller='categories'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*action='create',application='Backend',controller='categories'*/[0m
+  ↳ app/controllers/api/v1/categories_controller.rb:24:in `create'
+  [1m[36mCategory Exists? (3.0ms)[0m  [1m[34mSELECT 1 AS one FROM "categories" WHERE LOWER("categories"."name") = LOWER('Residential') LIMIT 1 /*action='create',application='Backend',controller='categories'*/[0m
+  ↳ app/controllers/api/v1/categories_controller.rb:24:in `create'
+  [1m[36mCategory Create (0.7ms)[0m  [1m[32mINSERT INTO "categories" ("name", "created_at", "updated_at") VALUES ('Residential', '2026-01-20 16:34:24.086560', '2026-01-20 16:34:24.086560') RETURNING "id" /*action='create',application='Backend',controller='categories'*/[0m
+  ↳ app/controllers/api/v1/categories_controller.rb:24:in `create'
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT /*action='create',application='Backend',controller='categories'*/[0m
+  ↳ app/controllers/api/v1/categories_controller.rb:24:in `create'
+[active_model_serializers] Rendered CategorySerializer with ActiveModelSerializers::Adapter::Attributes (0.23ms)
+Completed 201 Created in 20ms (Views: 1.0ms | ActiveRecord: 12.1ms (3 queries, 0 cached) | GC: 0.5ms)
+
+
+Started POST "/v1/login" for ::1 at 2026-01-20 18:38:00 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+  
+ActionDispatch::MissingController (uninitialized constant V1)
+Caused by: NameError (uninitialized constant V1)
+
+Information for: ActionDispatch::MissingController (uninitialized constant V1):
+  
+actionpack (8.1.2) lib/action_dispatch/http/request.rb:101:in `rescue in controller_class_for'
+actionpack (8.1.2) lib/action_dispatch/http/request.rb:97:in `controller_class_for'
+actionpack (8.1.2) lib/action_dispatch/http/request.rb:90:in `controller_class'
+actionpack (8.1.2) lib/action_dispatch/routing/route_set.rb:61:in `controller'
+actionpack (8.1.2) lib/action_dispatch/routing/route_set.rb:48:in `serve'
+actionpack (8.1.2) lib/action_dispatch/journey/router.rb:35:in `block in serve'
+actionpack (8.1.2) lib/action_dispatch/journey/router.rb:86:in `block in recognize'
+actionpack (8.1.2) lib/action_dispatch/journey/router.rb:66:in `each'
+actionpack (8.1.2) lib/action_dispatch/journey/router.rb:66:in `recognize'
+actionpack (8.1.2) lib/action_dispatch/journey/router.rb:31:in `serve'
+actionpack (8.1.2) lib/action_dispatch/routing/route_set.rb:906:in `call'
+warden-jwt_auth (0.12.0) lib/warden/jwt_auth/middleware/token_dispatcher.rb:20:in `call'
+warden-jwt_auth (0.12.0) lib/warden/jwt_auth/middleware/revocation_manager.rb:21:in `call'
+rack (3.2.4) lib/rack/builder.rb:283:in `call'
+warden-jwt_auth (0.12.0) lib/warden/jwt_auth/middleware.rb:22:in `call'
+warden (1.2.9) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.9) lib/warden/manager.rb:34:in `catch'
+warden (1.2.9) lib/warden/manager.rb:34:in `call'
+rack (3.2.4) lib/rack/etag.rb:29:in `call'
+rack (3.2.4) lib/rack/conditional_get.rb:44:in `call'
+rack (3.2.4) lib/rack/head.rb:15:in `call'
+activerecord (8.1.2) lib/active_record/migration.rb:671:in `call'
+actionpack (8.1.2) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.1.2) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (8.1.2) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.1.2) lib/action_dispatch/middleware/executor.rb:20:in `call'
+actionpack (8.1.2) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.1.2) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+actionpack (8.1.2) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.1.2) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.1.2) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.1.2) lib/action_dispatch/middleware/remote_ip.rb:98:in `call'
+actionpack (8.1.2) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.2.4) lib/rack/runtime.rb:24:in `call'
+activesupport (8.1.2) lib/active_support/cache/strategy/local_cache_middleware.rb:30:in `call'
+actionpack (8.1.2) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.1.2) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.1.2) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.1.2) lib/action_dispatch/middleware/executor.rb:20:in `call'
+actionpack (8.1.2) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.2.4) lib/rack/sendfile.rb:131:in `call'
+actionpack (8.1.2) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+rack-cors (3.0.0) lib/rack/cors.rb:102:in `call'
+railties (8.1.2) lib/rails/engine.rb:534:in `call'
+puma (7.1.0) lib/puma/configuration.rb:300:in `call'
+puma (7.1.0) lib/puma/request.rb:101:in `block in handle_request'
+puma (7.1.0) lib/puma/thread_pool.rb:355:in `with_force_shutdown'
+puma (7.1.0) lib/puma/request.rb:100:in `handle_request'
+puma (7.1.0) lib/puma/server.rb:503:in `process_client'
+puma (7.1.0) lib/puma/server.rb:262:in `block in run'
+puma (7.1.0) lib/puma/thread_pool.rb:182:in `block in spawn_thread'
+
+Information for cause: NameError (uninitialized constant V1):
+  
+activesupport (8.1.2) lib/active_support/inflector/methods.rb:290:in `constantize'
+activesupport (8.1.2) lib/active_support/core_ext/string/inflections.rb:74:in `constantize'
+actionpack (8.1.2) lib/action_dispatch/http/request.rb:98:in `controller_class_for'
+actionpack (8.1.2) lib/action_dispatch/http/request.rb:90:in `controller_class'
+actionpack (8.1.2) lib/action_dispatch/routing/route_set.rb:61:in `controller'
+actionpack (8.1.2) lib/action_dispatch/routing/route_set.rb:48:in `serve'
+actionpack (8.1.2) lib/action_dispatch/journey/router.rb:35:in `block in serve'
+actionpack (8.1.2) lib/action_dispatch/journey/router.rb:86:in `block in recognize'
+actionpack (8.1.2) lib/action_dispatch/journey/router.rb:66:in `each'
+actionpack (8.1.2) lib/action_dispatch/journey/router.rb:66:in `recognize'
+actionpack (8.1.2) lib/action_dispatch/journey/router.rb:31:in `serve'
+actionpack (8.1.2) lib/action_dispatch/routing/route_set.rb:906:in `call'
+warden-jwt_auth (0.12.0) lib/warden/jwt_auth/middleware/token_dispatcher.rb:20:in `call'
+warden-jwt_auth (0.12.0) lib/warden/jwt_auth/middleware/revocation_manager.rb:21:in `call'
+rack (3.2.4) lib/rack/builder.rb:283:in `call'
+warden-jwt_auth (0.12.0) lib/warden/jwt_auth/middleware.rb:22:in `call'
+warden (1.2.9) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.9) lib/warden/manager.rb:34:in `catch'
+warden (1.2.9) lib/warden/manager.rb:34:in `call'
+rack (3.2.4) lib/rack/etag.rb:29:in `call'
+rack (3.2.4) lib/rack/conditional_get.rb:44:in `call'
+rack (3.2.4) lib/rack/head.rb:15:in `call'
+activerecord (8.1.2) lib/active_record/migration.rb:671:in `call'
+actionpack (8.1.2) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.1.2) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (8.1.2) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.1.2) lib/action_dispatch/middleware/executor.rb:20:in `call'
+actionpack (8.1.2) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.1.2) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+actionpack (8.1.2) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.1.2) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.1.2) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.1.2) lib/action_dispatch/middleware/remote_ip.rb:98:in `call'
+actionpack (8.1.2) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.2.4) lib/rack/runtime.rb:24:in `call'
+activesupport (8.1.2) lib/active_support/cache/strategy/local_cache_middleware.rb:30:in `call'
+actionpack (8.1.2) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.1.2) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.1.2) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.1.2) lib/action_dispatch/middleware/executor.rb:20:in `call'
+actionpack (8.1.2) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.2.4) lib/rack/sendfile.rb:131:in `call'
+actionpack (8.1.2) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+rack-cors (3.0.0) lib/rack/cors.rb:102:in `call'
+railties (8.1.2) lib/rails/engine.rb:534:in `call'
+puma (7.1.0) lib/puma/configuration.rb:300:in `call'
+puma (7.1.0) lib/puma/request.rb:101:in `block in handle_request'
+puma (7.1.0) lib/puma/thread_pool.rb:355:in `with_force_shutdown'
+puma (7.1.0) lib/puma/request.rb:100:in `handle_request'
+puma (7.1.0) lib/puma/server.rb:503:in `process_client'
+puma (7.1.0) lib/puma/server.rb:262:in `block in run'
+puma (7.1.0) lib/puma/thread_pool.rb:182:in `block in spawn_thread'
+Started POST "/v1/login" for ::1 at 2026-01-20 18:39:20 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+Processing by Api::V1::SessionsController#create as */*
+  Parameters: {"admin_user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}, "session"=>{"admin_user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}}
+  [1m[36mAdminUser Load (0.9ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."email" = 'admin@propertylistings.com' ORDER BY "admin_users"."created_at" ASC, "admin_users"."id" ASC LIMIT 1 /*action='create',application='Backend',controller='sessions'*/[0m
+  ↳ app/controllers/api/v1/sessions_controller.rb:10:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.07ms)
+Completed 200 OK in 237ms (Views: 2.0ms | ActiveRecord: 9.7ms (1 query, 0 cached) | GC: 2.4ms)
+
+
