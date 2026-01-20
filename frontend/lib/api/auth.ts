@@ -76,7 +76,7 @@ export async function login(credentials: LoginCredentials): Promise<LoginRespons
 // Logout admin user
 export async function logout(): Promise<void> {
   try {
-    await api.delete('/api/v1/logout');
+    await api.post('/api/v1/logout');
   } catch (error) {
     // Ignore errors on logout - still clear local state
     console.warn('Logout API call failed:', error);

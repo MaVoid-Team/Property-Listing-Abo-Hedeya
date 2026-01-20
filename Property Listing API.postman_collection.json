@@ -1,9 +1,11 @@
 {
 	"info": {
-		"_postman_id": "property-listing-api-collection",
+		"_postman_id": "42317b25-4ad5-4288-b58d-ae848b7dbff6",
 		"name": "Property Listing API",
 		"description": "Complete API collection for Property Listing Application",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39684598",
+		"_collection_link": "https://mavoid.postman.co/workspace/MaVoid-Workspace~84b37c58-7771-450e-89fe-5b6df5896100/collection/40148993-42317b25-4ad5-4288-b58d-ae848b7dbff6?action=share&source=collection_link&creator=39684598"
 	},
 	"item": [
 		{
@@ -16,18 +18,34 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"if (pm.response.code === 200) {",
+									"try {",
+									"  if (pm.response.code === 200) {",
 									"    var jsonData = pm.response.json();",
-									"    if (jsonData.success) {",
-									"        // Extract token from Authorization header if present",
+									"    if (jsonData && jsonData.success) {",
+									"      // Prefer token from JSON body (custom SessionsController)",
+									"      var token = jsonData.token;",
+									"      if (token) {",
+									"        // Store in both environment and collection variables",
+									"        pm.environment.set('auth_token', token);",
+									"        pm.collectionVariables.set('auth_token', token);",
+									"      } else {",
+									"        // Fallback: extract token from Authorization header if present",
 									"        var authHeader = pm.response.headers.get('Authorization');",
 									"        if (authHeader) {",
-									"            pm.environment.set('auth_token', authHeader.replace('Bearer ', ''));",
+									"          var headerToken = authHeader.replace('Bearer ', '');",
+									"          pm.environment.set('auth_token', headerToken);",
+									"          pm.collectionVariables.set('auth_token', headerToken);",
 									"        }",
+									"      }",
 									"    }",
+									"  }",
+									"} catch (e) {",
+									"  console.log('Login test script error:', e.message);",
 									"}"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
 							}
 						}
 					],
@@ -96,7 +114,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/api/v1/properties?available=true&featured=false&property_type=house&location=downtown&min_price=100000&max_price=500000",
+							"raw": "{{base_url}}/api/v1/properties",
 							"host": [
 								"{{base_url}}"
 							],
@@ -146,7 +164,123 @@
 						},
 						"description": "Get all properties with optional filters.\n\n**Query Parameters:**\n- `available` (boolean): Filter available properties\n- `featured` (boolean): Filter featured properties\n- `property_type` (string): house, apartment, condo, townhouse, land, commercial\n- `location` (string): Search by address\n- `min_price` (number): Minimum price\n- `max_price` (number): Maximum price"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "List All Properties",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/v1/properties",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"properties"
+									],
+									"query": [
+										{
+											"key": "available",
+											"value": "true",
+											"description": "Filter by available status",
+											"disabled": true
+										},
+										{
+											"key": "featured",
+											"value": "false",
+											"description": "Filter by featured status",
+											"disabled": true
+										},
+										{
+											"key": "property_type",
+											"value": "house",
+											"description": "Filter by type: house, apartment, condo, townhouse, land, commercial",
+											"disabled": true
+										},
+										{
+											"key": "location",
+											"value": "downtown",
+											"description": "Search by location/address",
+											"disabled": true
+										},
+										{
+											"key": "min_price",
+											"value": "100000",
+											"description": "Minimum price filter",
+											"disabled": true
+										},
+										{
+											"key": "max_price",
+											"value": "500000",
+											"description": "Maximum price filter",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "x-frame-options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "x-xss-protection",
+									"value": "0"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "x-permitted-cross-domain-policies",
+									"value": "none"
+								},
+								{
+									"key": "referrer-policy",
+									"value": "strict-origin-when-cross-origin"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "vary",
+									"value": "Accept, Origin"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"662a8a73f17e8eaad5d43c21dc6452ca\""
+								},
+								{
+									"key": "cache-control",
+									"value": "max-age=0, private, must-revalidate"
+								},
+								{
+									"key": "x-request-id",
+									"value": "dec6903f-a035-459b-9d0c-f5a7ebd6a848"
+								},
+								{
+									"key": "x-runtime",
+									"value": "0.215138"
+								},
+								{
+									"key": "server-timing",
+									"value": "start_processing.action_controller;dur=0.03, sql.active_record;dur=35.80, instantiation.active_record;dur=30.96, render.active_model_serializers;dur=63.81, process_action.action_controller;dur=200.92"
+								},
+								{
+									"key": "content-length",
+									"value": "4193"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": \"b6274c30-6078-4122-a214-0a9f58e793cb\",\n        \"title\": \"Charming Townhouse\",\n        \"description\": \"Elegant 3-story townhouse with rooftop terrace, modern finishes, and garage in prime location.\",\n        \"address\": \"888 Urban Row, City Center, NY 10006\",\n        \"price\": 520000,\n        \"bedrooms\": 3,\n        \"bathrooms\": 2,\n        \"area\": 1650,\n        \"property_type\": \"townhouse\",\n        \"status\": \"available\",\n        \"featured\": false,\n        \"created_at\": \"2026-01-15T18:40:34.455Z\",\n        \"updated_at\": \"2026-01-15T18:40:34.455Z\",\n        \"created_by\": \"2486b80d-39f1-4e2f-ba13-95aa7ca86e3b\",\n        \"property_images\": []\n    },\n    {\n        \"id\": \"420a9095-2d20-4b16-92af-849ea51fe455\",\n        \"title\": \"Commercial Office Space\",\n        \"description\": \"Prime commercial office space with 5000 sq ft, parking, and excellent visibility on main road.\",\n        \"address\": \"555 Business Park, Commercial District, NY 10005\",\n        \"price\": 1200000,\n        \"bedrooms\": 0,\n        \"bathrooms\": 4,\n        \"area\": 5000,\n        \"property_type\": \"commercial\",\n        \"status\": \"available\",\n        \"featured\": false,\n        \"created_at\": \"2026-01-15T18:40:34.447Z\",\n        \"updated_at\": \"2026-01-15T18:40:34.447Z\",\n        \"created_by\": \"2486b80d-39f1-4e2f-ba13-95aa7ca86e3b\",\n        \"property_images\": []\n    },\n    {\n        \"id\": \"7f26fb32-4133-4492-9b40-2f97461dec83\",\n        \"title\": \"Cozy Starter Home\",\n        \"description\": \"Perfect starter home with 2 bedrooms, updated kitchen, and nice backyard in a quiet neighborhood.\",\n        \"address\": \"321 Maple Lane, Suburbia, NY 10004\",\n        \"price\": 280000,\n        \"bedrooms\": 2,\n        \"bathrooms\": 1,\n        \"area\": 1100,\n        \"property_type\": \"house\",\n        \"status\": \"available\",\n        \"featured\": false,\n        \"created_at\": \"2026-01-15T18:40:34.436Z\",\n        \"updated_at\": \"2026-01-15T18:40:34.436Z\",\n        \"created_by\": \"2486b80d-39f1-4e2f-ba13-95aa7ca86e3b\",\n        \"property_images\": []\n    },\n    {\n        \"id\": \"e7c1f5e8-3a00-405d-85f5-78f31f56b00a\",\n        \"title\": \"andtoniadis b13\",\n        \"description\": \"260 m\",\n        \"address\": \"antoniadis compound\",\n        \"price\": 12000000,\n        \"bedrooms\": 4,\n        \"bathrooms\": 3,\n        \"area\": 260,\n        \"property_type\": \"house\",\n        \"status\": \"available\",\n        \"featured\": false,\n        \"created_at\": \"2026-01-12T15:55:25.283Z\",\n        \"updated_at\": \"2026-01-12T15:55:25.283Z\",\n        \"created_by\": \"2486b80d-39f1-4e2f-ba13-95aa7ca86e3b\",\n        \"property_images\": [\n            {\n                \"id\": \"b07cd697-a36c-4bf5-8e7c-d812e7b07305\",\n                \"property_id\": \"e7c1f5e8-3a00-405d-85f5-78f31f56b00a\",\n                \"image_url\": \"http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsiZGF0YSI6IjE5ZmE1YWY3LWZmNzctNDFiNS1hMWI5LWExOGY1MzA2YTViYyIsInB1ciI6ImJsb2JfaWQifX0=--198dddd44dd655aeab99ee9b7d6f88bd043a0d00/Screenshot%20from%202025-12-20%2017-41-51.png\",\n                \"blob_url\": \"http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsiZGF0YSI6IjE5ZmE1YWY3LWZmNzctNDFiNS1hMWI5LWExOGY1MzA2YTViYyIsInB1ciI6ImJsb2JfaWQifX0=--198dddd44dd655aeab99ee9b7d6f88bd043a0d00/Screenshot%20from%202025-12-20%2017-41-51.png\",\n                \"is_primary\": true,\n                \"created_at\": \"2026-01-12T15:55:25.473Z\"\n            }\n        ]\n    },\n    {\n        \"id\": \"121c7b3a-a2ab-4501-9a9f-4871f1e6b1ce\",\n        \"title\": \"Luxury Waterfront Condo\",\n        \"description\": \"Breathtaking 3-bedroom condo with panoramic water views, private balcony, and resort-style amenities.\",\n        \"address\": \"789 Harbor Drive, Waterfront, NY 10003\",\n        \"price\": 850000,\n        \"bedrooms\": 3,\n        \"bathrooms\": 2,\n        \"area\": 1800,\n        \"property_type\": \"condo\",\n        \"status\": \"available\",\n        \"featured\": true,\n        \"created_at\": \"2026-01-12T15:52:22.014Z\",\n        \"updated_at\": \"2026-01-12T15:52:22.014Z\",\n        \"created_by\": \"2486b80d-39f1-4e2f-ba13-95aa7ca86e3b\",\n        \"property_images\": []\n    },\n    {\n        \"id\": \"7e029baa-78f7-478e-9128-8545b75c8c1c\",\n        \"title\": \"Spacious Family Home\",\n        \"description\": \"Beautiful 4-bedroom family home with a large backyard, modern kitchen, and attached 2-car garage.\",\n        \"address\": \"456 Oak Avenue, Suburbs, NY 10002\",\n        \"price\": 650000,\n        \"bedrooms\": 4,\n        \"bathrooms\": 3,\n        \"area\": 2500,\n        \"property_type\": \"house\",\n        \"status\": \"available\",\n        \"featured\": true,\n        \"created_at\": \"2026-01-12T15:52:22.004Z\",\n        \"updated_at\": \"2026-01-12T15:52:22.004Z\",\n        \"created_by\": \"2486b80d-39f1-4e2f-ba13-95aa7ca86e3b\",\n        \"property_images\": []\n    },\n    {\n        \"id\": \"7e80251b-1be4-4b88-80c7-e7a595ecde54\",\n        \"title\": \"Modern Downtown Loft\",\n        \"description\": \"Stunning 2-bedroom loft in the heart of downtown with floor-to-ceiling windows, exposed brick, and premium finishes.\",\n        \"address\": \"123 Main Street, Downtown, NY 10001\",\n        \"price\": 450000,\n        \"bedrooms\": 2,\n        \"bathrooms\": 2,\n        \"area\": 1200,\n        \"property_type\": \"apartment\",\n        \"status\": \"available\",\n        \"featured\": true,\n        \"created_at\": \"2026-01-12T15:52:21.993Z\",\n        \"updated_at\": \"2026-01-12T15:52:21.993Z\",\n        \"created_by\": \"2486b80d-39f1-4e2f-ba13-95aa7ca86e3b\",\n        \"property_images\": []\n    }\n]"
+						}
+					]
 				},
 				{
 					"name": "Get Property by ID",
@@ -174,7 +308,93 @@
 						},
 						"description": "Get a single property by ID with images and category details."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Get Property by ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/v1/properties/:id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"properties",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "b6274c30-6078-4122-a214-0a9f58e793cb",
+											"description": "Property UUID"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "x-frame-options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "x-xss-protection",
+									"value": "0"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "x-permitted-cross-domain-policies",
+									"value": "none"
+								},
+								{
+									"key": "referrer-policy",
+									"value": "strict-origin-when-cross-origin"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "vary",
+									"value": "Accept, Origin"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"679dd9a660fc616139b3d588f15c24ad\""
+								},
+								{
+									"key": "cache-control",
+									"value": "max-age=0, private, must-revalidate"
+								},
+								{
+									"key": "x-request-id",
+									"value": "a62822c3-03f6-4887-b19e-5ebcdab3f20e"
+								},
+								{
+									"key": "x-runtime",
+									"value": "0.011257"
+								},
+								{
+									"key": "server-timing",
+									"value": "start_processing.action_controller;dur=0.01, sql.active_record;dur=1.37, instantiation.active_record;dur=0.07, render.active_model_serializers;dur=5.27, process_action.action_controller;dur=8.92"
+								},
+								{
+									"key": "content-length",
+									"value": "527"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"b6274c30-6078-4122-a214-0a9f58e793cb\",\n    \"title\": \"Charming Townhouse\",\n    \"description\": \"Elegant 3-story townhouse with rooftop terrace, modern finishes, and garage in prime location.\",\n    \"address\": \"888 Urban Row, City Center, NY 10006\",\n    \"price\": 520000,\n    \"bedrooms\": 3,\n    \"bathrooms\": 2,\n    \"area\": 1650,\n    \"property_type\": \"townhouse\",\n    \"status\": \"available\",\n    \"featured\": false,\n    \"created_at\": \"2026-01-15T18:40:34.455Z\",\n    \"updated_at\": \"2026-01-15T18:40:34.455Z\",\n    \"created_by\": \"2486b80d-39f1-4e2f-ba13-95aa7ca86e3b\",\n    \"property_images\": [],\n    \"category\": null\n}"
+						}
+					]
 				},
 				{
 					"name": "Create Property",
@@ -302,15 +522,15 @@
 							"formdata": [
 								{
 									"key": "image",
+									"description": "Image file to upload",
 									"type": "file",
-									"src": [],
-									"description": "Image file to upload"
+									"src": []
 								},
 								{
 									"key": "is_primary",
 									"value": "true",
-									"type": "text",
-									"description": "Set as primary image (true/false)"
+									"description": "Set as primary image (true/false)",
+									"type": "text"
 								}
 							]
 						},
@@ -337,13 +557,7 @@
 						"description": "Upload an image for a property. Requires authentication.\n\n**Form Data:**\n- `image` (file): Image file to upload\n- `is_primary` (boolean): Set as primary image"
 					},
 					"response": []
-				}
-			],
-			"description": "Property management endpoints"
-		},
-		{
-			"name": "Property Images",
-			"item": [
+				},
 				{
 					"name": "Delete Property Image",
 					"request": {
@@ -379,7 +593,7 @@
 					"response": []
 				}
 			],
-			"description": "Property image management endpoints"
+			"description": "Property management endpoints"
 		},
 		{
 			"name": "Categories",
@@ -758,4 +972,3 @@
 		}
 	]
 }
-
