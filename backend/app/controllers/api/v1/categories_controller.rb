@@ -9,7 +9,7 @@ module Api
       # GET /api/v1/categories
       def index
         @categories = Category.all.order(:name)
-        render json: @categories, each_serializer: CategorySerializer
+        render_paginated(@categories, serializer: CategorySerializer)
       end
 
       # GET /api/v1/categories/:id

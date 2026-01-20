@@ -22,6 +22,30 @@ module Api
       def render_not_found(resource = 'Resource')
         render json: { error: "#{resource} not found" }, status: :not_found
       end
+
+      def render_paginated(collection, serializer: nil, include: [])
+        pagy, paginated = pagy(collection, page: params[:page], items: params[:per_page] || 25)
+        
+        serialized_data = if serializer
+          ActiveModel::Serializer::CollectionSerializer.new(
+            paginated,
+            serializer: serializer,
+            include: include
+          ).as_json
+        else
+          paginated.as_json
+        end
+        
+        render json: {
+          data: serialized_data,
+          meta: {
+            current_page: pagy.page,
+            per_page: pagy.items,
+            total_pages: pagy.pages,
+            total_count: pagy.count
+          }
+        }
+      end
     end
   end
 end

@@ -2068,3 +2068,42 @@ Processing by Api::V1::SessionsController#create as */*
 Completed 200 OK in 237ms (Views: 2.0ms | ActiveRecord: 9.7ms (1 query, 0 cached) | GC: 2.4ms)
 
 
+Started POST "/v1/login" for 127.0.0.1 at 2026-01-20 23:36:02 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (3.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+Processing by Api::V1::SessionsController#create as */*
+  Parameters: {"admin_user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}, "session"=>{"admin_user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}}
+  [1m[36mAdminUser Load (4.0ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."email" = 'admin@propertylistings.com' ORDER BY "admin_users"."created_at" ASC, "admin_users"."id" ASC LIMIT 1 /*action='create',application='Backend',controller='sessions'*/[0m
+  ↳ app/controllers/api/v1/sessions_controller.rb:10:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.09ms)
+Completed 200 OK in 270ms (Views: 2.5ms | ActiveRecord: 29.6ms (1 query, 0 cached) | GC: 2.0ms)
+
+
+Started GET "/v1/properties" for 127.0.0.1 at 2026-01-20 23:36:09 +0200
+Processing by Api::V1::PropertiesController#index as */*
+  [1m[36mProperty Load (4.1ms)[0m  [1m[34mSELECT "properties".* FROM "properties" ORDER BY "properties"."created_at" DESC /*action='index',application='Backend',controller='properties'*/[0m
+  ↳ app/controllers/api/v1/properties_controller.rb:22:in `index'
+  [1m[36mPropertyImage Load (3.2ms)[0m  [1m[34mSELECT "property_images".* FROM "property_images" WHERE "property_images"."property_id" IN ('6fa299a7-557e-4263-861e-7e7b06468ebf', '9380d041-bfce-4183-97ec-580bb8c8e9a4', 'b6274c30-6078-4122-a214-0a9f58e793cb', '420a9095-2d20-4b16-92af-849ea51fe455', '7f26fb32-4133-4492-9b40-2f97461dec83', 'e7c1f5e8-3a00-405d-85f5-78f31f56b00a', '121c7b3a-a2ab-4501-9a9f-4871f1e6b1ce', '7e029baa-78f7-478e-9128-8545b75c8c1c', '7e80251b-1be4-4b88-80c7-e7a595ecde54') /*action='index',application='Backend',controller='properties'*/[0m
+  ↳ app/controllers/api/v1/properties_controller.rb:22:in `index'
+[active_model_serializers]   [1m[36mActiveStorage::Attachment Load (1.4ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = 'b07cd697-a36c-4bf5-8e7c-d812e7b07305' AND "active_storage_attachments"."record_type" = 'PropertyImage' AND "active_storage_attachments"."name" = 'image' LIMIT 1 /*action='index',application='Backend',controller='properties'*/[0m
+[active_model_serializers]   ↳ app/serializers/property_image_serializer.rb:9:in `image_url'
+[active_model_serializers]   [1m[36mActiveStorage::Blob Load (1.4ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = '19fa5af7-ff77-41b5-a1b9-a18f5306a5bc' LIMIT 1 /*action='index',application='Backend',controller='properties'*/[0m
+[active_model_serializers]   ↳ app/serializers/property_image_serializer.rb:11:in `image_url'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (39.31ms)
+Completed 200 OK in 125ms (Views: 91.8ms | ActiveRecord: 20.3ms (4 queries, 0 cached) | GC: 1.0ms)
+
+
+Started POST "/v1/inquiries" for 127.0.0.1 at 2026-01-20 23:36:25 +0200
+Processing by Api::V1::InquiriesController#create as */*
+  Parameters: {"inquiry"=>{"property_id"=>"6fa299a7-557e-4263-861e-7e7b06468ebf", "name"=>"John Doe", "email"=>"[FILTERED]", "phone"=>"+1234567890", "message"=>"I'm interested in this property. Please contact me."}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*action='create',application='Backend',controller='inquiries'*/[0m
+  ↳ app/controllers/api/v1/inquiries_controller.rb:24:in `create'
+  [1m[36mProperty Load (3.9ms)[0m  [1m[34mSELECT "properties".* FROM "properties" WHERE "properties"."id" = '6fa299a7-557e-4263-861e-7e7b06468ebf' LIMIT 1 /*action='create',application='Backend',controller='inquiries'*/[0m
+  ↳ app/controllers/api/v1/inquiries_controller.rb:24:in `create'
+  [1m[36mInquiry Create (19.2ms)[0m  [1m[32mINSERT INTO "inquiries" ("property_id", "name", "email", "phone", "message", "created_at", "updated_at") VALUES ('6fa299a7-557e-4263-861e-7e7b06468ebf', 'John Doe', 'john.doe@example.com', '+1234567890', 'I''m interested in this property. Please contact me.', '2026-01-20 21:36:25.737293', '2026-01-20 21:36:25.737293') RETURNING "id" /*action='create',application='Backend',controller='inquiries'*/[0m
+  ↳ app/controllers/api/v1/inquiries_controller.rb:24:in `create'
+  [1m[36mTRANSACTION (1.9ms)[0m  [1m[35mCOMMIT /*action='create',application='Backend',controller='inquiries'*/[0m
+  ↳ app/controllers/api/v1/inquiries_controller.rb:24:in `create'
+[active_model_serializers] Rendered InquirySerializer with ActiveModelSerializers::Adapter::Attributes (1.33ms)
+Completed 201 Created in 55ms (Views: 2.4ms | ActiveRecord: 30.9ms (2 queries, 0 cached) | GC: 0.0ms)
+
+

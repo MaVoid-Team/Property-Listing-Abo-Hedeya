@@ -9,7 +9,7 @@ module Api
       # GET /api/v1/inquiries
       def index
         @inquiries = Inquiry.includes(:property).recent
-        render json: @inquiries, each_serializer: InquirySerializer, include: ['property']
+        render_paginated(@inquiries, serializer: InquirySerializer, include: ['property'])
       end
 
       # GET /api/v1/inquiries/:id

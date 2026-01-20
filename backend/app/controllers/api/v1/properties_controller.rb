@@ -19,7 +19,7 @@ module Api
 
         @properties = @properties.order(created_at: :desc)
 
-        render json: @properties, each_serializer: PropertySerializer, include: ['property_images']
+        render_paginated(@properties, serializer: PropertySerializer, include: ['property_images'])
       end
 
       # GET /api/v1/properties/:id
