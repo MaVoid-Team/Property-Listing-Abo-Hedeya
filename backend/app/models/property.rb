@@ -26,10 +26,10 @@ class Property < ApplicationRecord
   scope :featured, -> { where(featured: true) }
   scope :by_type, ->(type) { where(property_type: type) if type.present? }
   scope :by_price_range, ->(min, max) {
-    scope = all
-    scope = scope.where('price >= ?', min) if min.present?
-    scope = scope.where('price <= ?', max) if max.present?
-    scope
+    result = where(nil)
+    result = result.where('price >= ?', min.to_f) if min.present?
+    result = result.where('price <= ?', max.to_f) if max.present?
+    result
   }
   scope :by_location, ->(location) { where('address ILIKE ?', "%#{location}%") if location.present? }
 

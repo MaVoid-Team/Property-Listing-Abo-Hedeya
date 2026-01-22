@@ -40,7 +40,7 @@ module Api
           data: serialized_data,
           meta: {
             current_page: pagy.page,
-            per_page: pagy.items,
+            per_page: pagy.limit,
             total_pages: pagy.pages,
             total_count: pagy.count
           }

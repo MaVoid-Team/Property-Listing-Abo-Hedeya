@@ -15,7 +15,7 @@ module Api
         @properties = @properties.featured if params[:featured] == 'true'
         @properties = @properties.by_type(params[:property_type]) if params[:property_type].present?
         @properties = @properties.by_location(params[:location]) if params[:location].present?
-        @properties = @properties.by_price_range(params[:min_price], params[:max_price])
+        @properties = @properties.by_price_range(params[:min_price], params[:max_price]) if params[:min_price].present? || params[:max_price].present?
 
         @properties = @properties.order(created_at: :desc)
 
