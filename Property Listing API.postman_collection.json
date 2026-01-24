@@ -1,11 +1,11 @@
 {
 	"info": {
-		"_postman_id": "42317b25-4ad5-4288-b58d-ae848b7dbff6",
+		"_postman_id": "1679787f-4e9f-41ac-ab6d-a0a288b7347b",
 		"name": "Property Listing API",
 		"description": "Complete API collection for Property Listing Application",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "39684598",
-		"_collection_link": "https://mavoid.postman.co/workspace/MaVoid-Workspace~84b37c58-7771-450e-89fe-5b6df5896100/collection/40148993-42317b25-4ad5-4288-b58d-ae848b7dbff6?action=share&source=collection_link&creator=39684598"
+		"_collection_link": "https://mavoid.postman.co/workspace/MaVoid-Workspace~84b37c58-7771-450e-89fe-5b6df5896100/collection/39684598-1679787f-4e9f-41ac-ab6d-a0a288b7347b?action=share&source=collection_link&creator=39684598"
 	},
 	"item": [
 		{
@@ -62,19 +62,152 @@
 							"raw": "{\n  \"admin_user\": {\n    \"email\": \"admin@propertylistings.com\",\n    \"password\": \"admin123\"\n  }\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/api/v1/login",
+							"raw": "{{base_url}}/v1/login",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"api",
 								"v1",
 								"login"
 							]
 						},
 						"description": "Admin login endpoint. Returns JWT token in Authorization header.\n\n**Default Credentials:**\n- Email: admin@propertylistings.com\n- Password: admin123"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"admin_user\": {\n    \"email\": \"admin@propertylistings.com\",\n    \"password\": \"admin123\"\n  }\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/v1/login",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"v1",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Tue, 20 Jan 2026 17:13:08 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "x-frame-options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "x-frame-options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "x-xss-protection",
+									"value": "0"
+								},
+								{
+									"key": "x-xss-protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "x-permitted-cross-domain-policies",
+									"value": "none"
+								},
+								{
+									"key": "referrer-policy",
+									"value": "strict-origin-when-cross-origin"
+								},
+								{
+									"key": "referrer-policy",
+									"value": "strict-origin-when-cross-origin"
+								},
+								{
+									"key": "vary",
+									"value": "Accept, Origin"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"513e8a6fdbc6f3a33b49a5eb48a566f4\""
+								},
+								{
+									"key": "Cache-Control",
+									"value": "max-age=0, private, must-revalidate"
+								},
+								{
+									"key": "x-request-id",
+									"value": "6dcf6d92-f3e1-4fac-afbe-00114990dae1"
+								},
+								{
+									"key": "x-runtime",
+									"value": "0.217177"
+								},
+								{
+									"key": "cf-cache-status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Nel",
+									"value": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}"
+								},
+								{
+									"key": "Report-To",
+									"value": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=3fkRZcdWYiWZVrRzQ0eH%2B44jlZGNzFkU9xI94keAO8cCKH01eC%2BefhPM6Ku8G3QQfc0b%2BHoHh133P4OcRL73RoyxrvxEe6vMFgCZLagR0g%2BlhB7%2B3w%3D%3D\"}]}"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "9c103360be0ee1c5-MRS"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Login successful\",\n    \"token\": \"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1ZWVlOTBiOS1hYjY3LTRkMTYtOGJjNi03NGU4MGY5MjlkM2MiLCJzY3AiOiJhZG1pbl91c2VyIiwianRpIjoiNjI3NzIyZTktZGRkZi00NTM1LTk0ZGItZWRmNDk2YzA4NjU5IiwiZXhwIjoxNzY5MDE1NTg4fQ.PJAU_RlNDMapR3rA-4zUQ_01xnWeQfgHyCpPBsg0wF8\",\n    \"admin\": {\n        \"id\": \"5eee90b9-ab67-4d16-8bc6-74e80f929d3c\",\n        \"email\": \"admin@propertylistings.com\",\n        \"is_admin\": true\n    }\n}"
+						}
+					]
 				},
 				{
 					"name": "Logout",
@@ -88,19 +221,149 @@
 							}
 						],
 						"url": {
-							"raw": "{{base_url}}/api/v1/logout",
+							"raw": "{{base_url}}/v1/logout",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"api",
 								"v1",
 								"logout"
 							]
 						},
 						"description": "Logout endpoint. Revokes the JWT token."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Logout",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/v1/logout",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"v1",
+										"logout"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Date",
+									"value": "Tue, 20 Jan 2026 17:13:03 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "x-frame-options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "x-frame-options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "x-xss-protection",
+									"value": "0"
+								},
+								{
+									"key": "x-xss-protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "x-permitted-cross-domain-policies",
+									"value": "none"
+								},
+								{
+									"key": "referrer-policy",
+									"value": "strict-origin-when-cross-origin"
+								},
+								{
+									"key": "referrer-policy",
+									"value": "strict-origin-when-cross-origin"
+								},
+								{
+									"key": "vary",
+									"value": "Accept, Origin"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"aeafde1fa88fb9457ede1400adb3c2e7\""
+								},
+								{
+									"key": "Cache-Control",
+									"value": "max-age=0, private, must-revalidate"
+								},
+								{
+									"key": "x-request-id",
+									"value": "316c40cf-9ca1-49d4-90e7-facb53326d7b"
+								},
+								{
+									"key": "x-runtime",
+									"value": "0.006582"
+								},
+								{
+									"key": "cf-cache-status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Nel",
+									"value": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}"
+								},
+								{
+									"key": "Report-To",
+									"value": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=k9mV5dLZHOJpMWYVth1zP64SrEFl4iW6Owr6AOVtLDbcTBEP7sQ7O9LjNJNLB1bq0RHty8d15EcwKXIHGOdIISe6V2uBpERz4rvINVNdqoZen7p2UQ%3D%3D\"}]}"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "9c1033448a54e1c5-MRS"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Logged out successfully\"\n}"
+						}
+					]
 				}
 			],
 			"description": "Authentication endpoints for admin users"
@@ -114,16 +377,27 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/api/v1/properties",
+							"raw": "{{base_url}}/v1/properties",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"api",
 								"v1",
 								"properties"
 							],
 							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Page number (default: 1)",
+									"disabled": true
+								},
+								{
+									"key": "per_page",
+									"value": "25",
+									"description": "Items per page (default: 25)",
+									"disabled": true
+								},
 								{
 									"key": "available",
 									"value": "true",
@@ -162,7 +436,7 @@
 								}
 							]
 						},
-						"description": "Get all properties with optional filters.\n\n**Query Parameters:**\n- `available` (boolean): Filter available properties\n- `featured` (boolean): Filter featured properties\n- `property_type` (string): house, apartment, condo, townhouse, land, commercial\n- `location` (string): Search by address\n- `min_price` (number): Minimum price\n- `max_price` (number): Maximum price"
+						"description": "Get all properties with optional filters and pagination.\n\n**Pagination Parameters:**\n- `page` (number): Page number (default: 1)\n- `per_page` (number): Items per page (default: 25)\n\n**Filter Parameters:**\n- `available` (boolean): Filter available properties\n- `featured` (boolean): Filter featured properties\n- `property_type` (string): house, apartment, condo, townhouse, land, commercial\n- `location` (string): Search by address\n- `min_price` (number): Minimum price\n- `max_price` (number): Maximum price\n\n**Response Format:**\nReturns paginated response with `data` array and `meta` object containing pagination information."
 					},
 					"response": [
 						{
@@ -181,6 +455,18 @@
 										"properties"
 									],
 									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"description": "Page number (default: 1)",
+											"disabled": true
+										},
+										{
+											"key": "per_page",
+											"value": "25",
+											"description": "Items per page (default: 25)",
+											"disabled": true
+										},
 										{
 											"key": "available",
 											"value": "true",
@@ -222,7 +508,7 @@
 							},
 							"status": "OK",
 							"code": 200,
-							"_postman_previewlanguage": "",
+							"_postman_previewlanguage": "Text",
 							"header": [
 								{
 									"key": "x-frame-options",
@@ -278,7 +564,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "[\n    {\n        \"id\": \"b6274c30-6078-4122-a214-0a9f58e793cb\",\n        \"title\": \"Charming Townhouse\",\n        \"description\": \"Elegant 3-story townhouse with rooftop terrace, modern finishes, and garage in prime location.\",\n        \"address\": \"888 Urban Row, City Center, NY 10006\",\n        \"price\": 520000,\n        \"bedrooms\": 3,\n        \"bathrooms\": 2,\n        \"area\": 1650,\n        \"property_type\": \"townhouse\",\n        \"status\": \"available\",\n        \"featured\": false,\n        \"created_at\": \"2026-01-15T18:40:34.455Z\",\n        \"updated_at\": \"2026-01-15T18:40:34.455Z\",\n        \"created_by\": \"2486b80d-39f1-4e2f-ba13-95aa7ca86e3b\",\n        \"property_images\": []\n    },\n    {\n        \"id\": \"420a9095-2d20-4b16-92af-849ea51fe455\",\n        \"title\": \"Commercial Office Space\",\n        \"description\": \"Prime commercial office space with 5000 sq ft, parking, and excellent visibility on main road.\",\n        \"address\": \"555 Business Park, Commercial District, NY 10005\",\n        \"price\": 1200000,\n        \"bedrooms\": 0,\n        \"bathrooms\": 4,\n        \"area\": 5000,\n        \"property_type\": \"commercial\",\n        \"status\": \"available\",\n        \"featured\": false,\n        \"created_at\": \"2026-01-15T18:40:34.447Z\",\n        \"updated_at\": \"2026-01-15T18:40:34.447Z\",\n        \"created_by\": \"2486b80d-39f1-4e2f-ba13-95aa7ca86e3b\",\n        \"property_images\": []\n    },\n    {\n        \"id\": \"7f26fb32-4133-4492-9b40-2f97461dec83\",\n        \"title\": \"Cozy Starter Home\",\n        \"description\": \"Perfect starter home with 2 bedrooms, updated kitchen, and nice backyard in a quiet neighborhood.\",\n        \"address\": \"321 Maple Lane, Suburbia, NY 10004\",\n        \"price\": 280000,\n        \"bedrooms\": 2,\n        \"bathrooms\": 1,\n        \"area\": 1100,\n        \"property_type\": \"house\",\n        \"status\": \"available\",\n        \"featured\": false,\n        \"created_at\": \"2026-01-15T18:40:34.436Z\",\n        \"updated_at\": \"2026-01-15T18:40:34.436Z\",\n        \"created_by\": \"2486b80d-39f1-4e2f-ba13-95aa7ca86e3b\",\n        \"property_images\": []\n    },\n    {\n        \"id\": \"e7c1f5e8-3a00-405d-85f5-78f31f56b00a\",\n        \"title\": \"andtoniadis b13\",\n        \"description\": \"260 m\",\n        \"address\": \"antoniadis compound\",\n        \"price\": 12000000,\n        \"bedrooms\": 4,\n        \"bathrooms\": 3,\n        \"area\": 260,\n        \"property_type\": \"house\",\n        \"status\": \"available\",\n        \"featured\": false,\n        \"created_at\": \"2026-01-12T15:55:25.283Z\",\n        \"updated_at\": \"2026-01-12T15:55:25.283Z\",\n        \"created_by\": \"2486b80d-39f1-4e2f-ba13-95aa7ca86e3b\",\n        \"property_images\": [\n            {\n                \"id\": \"b07cd697-a36c-4bf5-8e7c-d812e7b07305\",\n                \"property_id\": \"e7c1f5e8-3a00-405d-85f5-78f31f56b00a\",\n                \"image_url\": \"http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsiZGF0YSI6IjE5ZmE1YWY3LWZmNzctNDFiNS1hMWI5LWExOGY1MzA2YTViYyIsInB1ciI6ImJsb2JfaWQifX0=--198dddd44dd655aeab99ee9b7d6f88bd043a0d00/Screenshot%20from%202025-12-20%2017-41-51.png\",\n                \"blob_url\": \"http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsiZGF0YSI6IjE5ZmE1YWY3LWZmNzctNDFiNS1hMWI5LWExOGY1MzA2YTViYyIsInB1ciI6ImJsb2JfaWQifX0=--198dddd44dd655aeab99ee9b7d6f88bd043a0d00/Screenshot%20from%202025-12-20%2017-41-51.png\",\n                \"is_primary\": true,\n                \"created_at\": \"2026-01-12T15:55:25.473Z\"\n            }\n        ]\n    },\n    {\n        \"id\": \"121c7b3a-a2ab-4501-9a9f-4871f1e6b1ce\",\n        \"title\": \"Luxury Waterfront Condo\",\n        \"description\": \"Breathtaking 3-bedroom condo with panoramic water views, private balcony, and resort-style amenities.\",\n        \"address\": \"789 Harbor Drive, Waterfront, NY 10003\",\n        \"price\": 850000,\n        \"bedrooms\": 3,\n        \"bathrooms\": 2,\n        \"area\": 1800,\n        \"property_type\": \"condo\",\n        \"status\": \"available\",\n        \"featured\": true,\n        \"created_at\": \"2026-01-12T15:52:22.014Z\",\n        \"updated_at\": \"2026-01-12T15:52:22.014Z\",\n        \"created_by\": \"2486b80d-39f1-4e2f-ba13-95aa7ca86e3b\",\n        \"property_images\": []\n    },\n    {\n        \"id\": \"7e029baa-78f7-478e-9128-8545b75c8c1c\",\n        \"title\": \"Spacious Family Home\",\n        \"description\": \"Beautiful 4-bedroom family home with a large backyard, modern kitchen, and attached 2-car garage.\",\n        \"address\": \"456 Oak Avenue, Suburbs, NY 10002\",\n        \"price\": 650000,\n        \"bedrooms\": 4,\n        \"bathrooms\": 3,\n        \"area\": 2500,\n        \"property_type\": \"house\",\n        \"status\": \"available\",\n        \"featured\": true,\n        \"created_at\": \"2026-01-12T15:52:22.004Z\",\n        \"updated_at\": \"2026-01-12T15:52:22.004Z\",\n        \"created_by\": \"2486b80d-39f1-4e2f-ba13-95aa7ca86e3b\",\n        \"property_images\": []\n    },\n    {\n        \"id\": \"7e80251b-1be4-4b88-80c7-e7a595ecde54\",\n        \"title\": \"Modern Downtown Loft\",\n        \"description\": \"Stunning 2-bedroom loft in the heart of downtown with floor-to-ceiling windows, exposed brick, and premium finishes.\",\n        \"address\": \"123 Main Street, Downtown, NY 10001\",\n        \"price\": 450000,\n        \"bedrooms\": 2,\n        \"bathrooms\": 2,\n        \"area\": 1200,\n        \"property_type\": \"apartment\",\n        \"status\": \"available\",\n        \"featured\": true,\n        \"created_at\": \"2026-01-12T15:52:21.993Z\",\n        \"updated_at\": \"2026-01-12T15:52:21.993Z\",\n        \"created_by\": \"2486b80d-39f1-4e2f-ba13-95aa7ca86e3b\",\n        \"property_images\": []\n    }\n]"
+							"body": "{\n    \"data\": [\n        {\n            \"id\": \"b6274c30-6078-4122-a214-0a9f58e793cb\",\n            \"title\": \"Charming Townhouse\",\n            \"description\": \"Elegant 3-story townhouse with rooftop terrace, modern finishes, and garage in prime location.\",\n            \"address\": \"888 Urban Row, City Center, NY 10006\",\n            \"price\": 520000,\n            \"bedrooms\": 3,\n            \"bathrooms\": 2,\n            \"area\": 1650,\n            \"property_type\": \"townhouse\",\n            \"status\": \"available\",\n            \"featured\": false,\n            \"created_at\": \"2026-01-15T18:40:34.455Z\",\n            \"updated_at\": \"2026-01-15T18:40:34.455Z\",\n            \"created_by\": \"2486b80d-39f1-4e2f-ba13-95aa7ca86e3b\",\n            \"property_images\": []\n        },\n        {\n            \"id\": \"420a9095-2d20-4b16-92af-849ea51fe455\",\n            \"title\": \"Commercial Office Space\",\n            \"description\": \"Prime commercial office space with 5000 sq ft, parking, and excellent visibility on main road.\",\n            \"address\": \"555 Business Park, Commercial District, NY 10005\",\n            \"price\": 1200000,\n            \"bedrooms\": 0,\n            \"bathrooms\": 4,\n            \"area\": 5000,\n            \"property_type\": \"commercial\",\n            \"status\": \"available\",\n            \"featured\": false,\n            \"created_at\": \"2026-01-15T18:40:34.447Z\",\n            \"updated_at\": \"2026-01-15T18:40:34.447Z\",\n            \"created_by\": \"2486b80d-39f1-4e2f-ba13-95aa7ca86e3b\",\n            \"property_images\": []\n        }\n    ],\n    \"meta\": {\n        \"current_page\": 1,\n        \"per_page\": 25,\n        \"total_pages\": 1,\n        \"total_count\": 7\n    }\n}"
 						}
 					]
 				},
@@ -336,7 +622,7 @@
 							},
 							"status": "OK",
 							"code": 200,
-							"_postman_previewlanguage": "",
+							"_postman_previewlanguage": "Text",
 							"header": [
 								{
 									"key": "x-frame-options",
@@ -416,19 +702,110 @@
 							"raw": "{\n  \"property\": {\n    \"title\": \"Beautiful Modern House\",\n    \"description\": \"Spacious 3-bedroom house with modern amenities\",\n    \"address\": \"123 Main Street, Downtown\",\n    \"price\": 350000,\n    \"bedrooms\": 3,\n    \"bathrooms\": 2,\n    \"area\": 2000,\n    \"property_type\": \"house\",\n    \"status\": \"available\",\n    \"featured\": true,\n    \"category_id\": null\n  }\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/api/v1/properties",
+							"raw": "{{base_url}}/v1/properties",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"api",
 								"v1",
 								"properties"
 							]
 						},
-						"description": "Create a new property. Requires authentication.\n\n**Property Types:** house, apartment, condo, townhouse, land, commercial\n**Statuses:** available, pending, sold, rented"
+						"description": "Create a new property. Requires authentication.\n\n**Property Types:** house, apartment, condo, townhouse, land, commercial  \n**Statuses:** available, pending, sold, rented"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Create Property",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"property\": {\n    \"title\": \"Beautiful Modern House\",\n    \"description\": \"Spacious 3-bedroom house with modern amenities\",\n    \"address\": \"123 Main Street, Downtown\",\n    \"price\": 350000,\n    \"bedrooms\": 3,\n    \"bathrooms\": 2,\n    \"area\": 2000,\n    \"property_type\": \"house\",\n    \"status\": \"available\",\n    \"featured\": true,\n    \"category_id\": null\n  }\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/properties",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"properties"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "x-frame-options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "x-xss-protection",
+									"value": "0"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "x-permitted-cross-domain-policies",
+									"value": "none"
+								},
+								{
+									"key": "referrer-policy",
+									"value": "strict-origin-when-cross-origin"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "vary",
+									"value": "Accept, Origin"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"046f36533f96cb2f008cf2dba7be4b30\""
+								},
+								{
+									"key": "cache-control",
+									"value": "max-age=0, private, must-revalidate"
+								},
+								{
+									"key": "x-request-id",
+									"value": "9b9e5de2-5fcd-46ba-9a54-90367b5ac3de"
+								},
+								{
+									"key": "x-runtime",
+									"value": "0.015010"
+								},
+								{
+									"key": "server-timing",
+									"value": "start_processing.action_controller;dur=0.01, sql.active_record;dur=2.93, instantiation.active_record;dur=0.07, start_transaction.active_record;dur=0.01, transaction.active_record;dur=3.68, render.active_model_serializers;dur=3.44, process_action.action_controller;dur=12.48"
+								},
+								{
+									"key": "content-length",
+									"value": "467"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"d8620e04-ccae-44f2-bbe1-5022465cee18\",\n    \"title\": \"Beautiful Modern House\",\n    \"description\": \"Spacious 3-bedroom house with modern amenities\",\n    \"address\": \"123 Main Street, Downtown\",\n    \"price\": 350000,\n    \"bedrooms\": 3,\n    \"bathrooms\": 2,\n    \"area\": 2000,\n    \"property_type\": \"house\",\n    \"status\": \"available\",\n    \"featured\": true,\n    \"created_at\": \"2026-01-20T16:32:22.706Z\",\n    \"updated_at\": \"2026-01-20T16:32:22.706Z\",\n    \"created_by\": \"2486b80d-39f1-4e2f-ba13-95aa7ca86e3b\",\n    \"property_images\": [],\n    \"category\": null\n}"
+						}
+					]
 				},
 				{
 					"name": "Update Property",
@@ -463,14 +840,114 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "",
+									"value": "d8620e04-ccae-44f2-bbe1-5022465cee18",
 									"description": "Property UUID"
 								}
 							]
 						},
 						"description": "Update an existing property. Requires authentication."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Update Property",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"property\": {\n    \"title\": \"Updated Property Title\",\n    \"price\": 375000,\n    \"status\": \"pending\"\n  }\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/properties/:id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"properties",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "d8620e04-ccae-44f2-bbe1-5022465cee18",
+											"description": "Property UUID"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "x-frame-options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "x-xss-protection",
+									"value": "0"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "x-permitted-cross-domain-policies",
+									"value": "none"
+								},
+								{
+									"key": "referrer-policy",
+									"value": "strict-origin-when-cross-origin"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "vary",
+									"value": "Accept, Origin"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"47d5ec0a80014374ac2ab8b39e42604f\""
+								},
+								{
+									"key": "cache-control",
+									"value": "max-age=0, private, must-revalidate"
+								},
+								{
+									"key": "x-request-id",
+									"value": "8d52944a-af74-438c-a51f-c35dba5450f2"
+								},
+								{
+									"key": "x-runtime",
+									"value": "0.017792"
+								},
+								{
+									"key": "server-timing",
+									"value": "start_processing.action_controller;dur=0.01, sql.active_record;dur=4.19, instantiation.active_record;dur=0.10, start_transaction.active_record;dur=0.01, transaction.active_record;dur=3.43, render.active_model_serializers;dur=4.32, process_action.action_controller;dur=15.37"
+								},
+								{
+									"key": "content-length",
+									"value": "465"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"d8620e04-ccae-44f2-bbe1-5022465cee18\",\n    \"title\": \"Updated Property Title\",\n    \"description\": \"Spacious 3-bedroom house with modern amenities\",\n    \"address\": \"123 Main Street, Downtown\",\n    \"price\": 375000,\n    \"bedrooms\": 3,\n    \"bathrooms\": 2,\n    \"area\": 2000,\n    \"property_type\": \"house\",\n    \"status\": \"pending\",\n    \"featured\": true,\n    \"created_at\": \"2026-01-20T16:32:22.706Z\",\n    \"updated_at\": \"2026-01-20T16:32:49.316Z\",\n    \"created_by\": \"2486b80d-39f1-4e2f-ba13-95aa7ca86e3b\",\n    \"property_images\": [],\n    \"category\": null\n}"
+						}
+					]
 				},
 				{
 					"name": "Delete Property",
@@ -497,14 +974,94 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "",
+									"value": "d8620e04-ccae-44f2-bbe1-5022465cee18",
 									"description": "Property UUID"
 								}
 							]
 						},
 						"description": "Delete a property. Requires authentication."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Delete Property",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/api/v1/properties/:id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"properties",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "d8620e04-ccae-44f2-bbe1-5022465cee18",
+											"description": "Property UUID"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "x-frame-options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "x-xss-protection",
+									"value": "0"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "x-permitted-cross-domain-policies",
+									"value": "none"
+								},
+								{
+									"key": "referrer-policy",
+									"value": "strict-origin-when-cross-origin"
+								},
+								{
+									"key": "cache-control",
+									"value": "no-cache"
+								},
+								{
+									"key": "x-request-id",
+									"value": "09953eef-42a3-49e9-b5cc-e1ba55d6fb70"
+								},
+								{
+									"key": "x-runtime",
+									"value": "0.049382"
+								},
+								{
+									"key": "server-timing",
+									"value": "start_processing.action_controller;dur=0.01, sql.active_record;dur=13.82, instantiation.active_record;dur=0.10, start_transaction.active_record;dur=0.01, transaction.active_record;dur=39.46, process_action.action_controller;dur=46.98"
+								},
+								{
+									"key": "vary",
+									"value": "Origin"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
 				},
 				{
 					"name": "Upload Property Image",
@@ -524,7 +1081,7 @@
 									"key": "image",
 									"description": "Image file to upload",
 									"type": "file",
-									"src": []
+									"src": "postman-cloud:///1f0dc032-b8e8-4b20-9b5c-a4997faf784e"
 								},
 								{
 									"key": "is_primary",
@@ -549,14 +1106,124 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "",
+									"value": "6fa299a7-557e-4263-861e-7e7b06468ebf",
 									"description": "Property UUID"
 								}
 							]
 						},
 						"description": "Upload an image for a property. Requires authentication.\n\n**Form Data:**\n- `image` (file): Image file to upload\n- `is_primary` (boolean): Set as primary image"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Upload Property Image",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"description": "Image file to upload",
+											"type": "file",
+											"src": "postman-cloud:///1f0dc032-b8e8-4b20-9b5c-a4997faf784e"
+										},
+										{
+											"key": "is_primary",
+											"value": "true",
+											"description": "Set as primary image (true/false)",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/properties/:id/images",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"properties",
+										":id",
+										"images"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "6fa299a7-557e-4263-861e-7e7b06468ebf",
+											"description": "Property UUID"
+										}
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "x-frame-options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "x-xss-protection",
+									"value": "0"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "x-permitted-cross-domain-policies",
+									"value": "none"
+								},
+								{
+									"key": "referrer-policy",
+									"value": "strict-origin-when-cross-origin"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "vary",
+									"value": "Accept, Origin"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"15620c4823af747807b838fadc1779ca\""
+								},
+								{
+									"key": "cache-control",
+									"value": "max-age=0, private, must-revalidate"
+								},
+								{
+									"key": "x-request-id",
+									"value": "ba5b841c-3a7f-4f3a-8200-518090d00782"
+								},
+								{
+									"key": "x-runtime",
+									"value": "0.107989"
+								},
+								{
+									"key": "server-timing",
+									"value": "start_processing.action_controller;dur=0.03, sql.active_record;dur=18.37, instantiation.active_record;dur=0.12, start_transaction.active_record;dur=0.01, transaction.active_record;dur=18.95, service_upload.active_storage;dur=1.25, enqueue.active_job;dur=1.81, render.active_model_serializers;dur=1.69, process_action.action_controller;dur=97.82"
+								},
+								{
+									"key": "content-length",
+									"value": "609"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"b3881705-c19d-4aa3-9499-1bc359ea052d\",\n    \"property_id\": \"6fa299a7-557e-4263-861e-7e7b06468ebf\",\n    \"image_url\": \"http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsiZGF0YSI6ImYzYzI0N2UyLTUxOGYtNDczNS05MWJkLWU2MTdkMWZlOTM0YSIsInB1ciI6ImJsb2JfaWQifX0=--06fad59161f0ecac41f300e152eb59a8a928487b/unnamed.jpg\",\n    \"blob_url\": \"http://localhost:3000/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsiZGF0YSI6ImYzYzI0N2UyLTUxOGYtNDczNS05MWJkLWU2MTdkMWZlOTM0YSIsInB1ciI6ImJsb2JfaWQifX0=--06fad59161f0ecac41f300e152eb59a8a928487b/unnamed.jpg\",\n    \"is_primary\": true,\n    \"created_at\": \"2026-01-20T16:33:28.586Z\"\n}"
+						}
+					]
 				},
 				{
 					"name": "Delete Property Image",
@@ -583,14 +1250,94 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "",
+									"value": "b3881705-c19d-4aa3-9499-1bc359ea052d",
 									"description": "Property Image UUID"
 								}
 							]
 						},
 						"description": "Delete a property image. Requires authentication."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Delete Property Image",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/api/v1/property_images/:id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"property_images",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "b3881705-c19d-4aa3-9499-1bc359ea052d",
+											"description": "Property Image UUID"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "x-frame-options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "x-xss-protection",
+									"value": "0"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "x-permitted-cross-domain-policies",
+									"value": "none"
+								},
+								{
+									"key": "referrer-policy",
+									"value": "strict-origin-when-cross-origin"
+								},
+								{
+									"key": "cache-control",
+									"value": "no-cache"
+								},
+								{
+									"key": "x-request-id",
+									"value": "abd432b2-c0b4-4a13-876e-8a44e816f629"
+								},
+								{
+									"key": "x-runtime",
+									"value": "0.056476"
+								},
+								{
+									"key": "server-timing",
+									"value": "start_processing.action_controller;dur=0.02, sql.active_record;dur=14.28, instantiation.active_record;dur=0.41, start_transaction.active_record;dur=0.02, service_delete.active_storage;dur=0.16, service_delete_prefixed.active_storage;dur=0.12, transaction.active_record;dur=31.27, enqueue.active_job;dur=0.43, process_action.action_controller;dur=44.95"
+								},
+								{
+									"key": "vary",
+									"value": "Origin"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
 				}
 			],
 			"description": "Property management endpoints"
@@ -612,11 +1359,117 @@
 								"api",
 								"v1",
 								"categories"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Page number (default: 1)",
+									"disabled": true
+								},
+								{
+									"key": "per_page",
+									"value": "25",
+									"description": "Items per page (default: 25)",
+									"disabled": true
+								}
 							]
 						},
-						"description": "Get all categories."
+						"description": "Get all categories with pagination.\n\n**Pagination Parameters:**\n- `page` (number): Page number (default: 1)\n- `per_page` (number): Items per page (default: 25)\n\n**Response Format:**\nReturns paginated response with `data` array and `meta` object containing pagination information."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "List All Categories",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/v1/categories",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"categories"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"description": "Page number (default: 1)",
+											"disabled": true
+										},
+										{
+											"key": "per_page",
+											"value": "25",
+											"description": "Items per page (default: 25)",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "x-frame-options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "x-xss-protection",
+									"value": "0"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "x-permitted-cross-domain-policies",
+									"value": "none"
+								},
+								{
+									"key": "referrer-policy",
+									"value": "strict-origin-when-cross-origin"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "vary",
+									"value": "Accept, Origin"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"c3665fd43901c2f7dcf25c0363df64aa\""
+								},
+								{
+									"key": "cache-control",
+									"value": "max-age=0, private, must-revalidate"
+								},
+								{
+									"key": "x-request-id",
+									"value": "65b980a3-708b-453d-ab87-ae8d783db713"
+								},
+								{
+									"key": "x-runtime",
+									"value": "0.023921"
+								},
+								{
+									"key": "server-timing",
+									"value": "start_processing.action_controller;dur=0.02, sql.active_record;dur=4.90, instantiation.active_record;dur=2.10, render.active_model_serializers;dur=0.88, process_action.action_controller;dur=11.44"
+								},
+								{
+									"key": "content-length",
+									"value": "619"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": \"d12f2c29-ce95-4819-a9e5-4811d2e66aee\",\n            \"name\": \"Apartment\",\n            \"created_at\": \"2026-01-12T15:52:21.897Z\"\n        },\n        {\n            \"id\": \"36e4abd4-2680-4c01-92c5-f2cb43573c4a\",\n            \"name\": \"Commercial\",\n            \"created_at\": \"2026-01-12T15:52:21.956Z\"\n        },\n        {\n            \"id\": \"765fbc10-fdad-48fb-bc6f-8563691e28b4\",\n            \"name\": \"Condo\",\n            \"created_at\": \"2026-01-12T15:52:21.916Z\"\n        },\n        {\n            \"id\": \"43a9805a-efa2-4c7d-88b4-3690530f67d8\",\n            \"name\": \"House\",\n            \"created_at\": \"2026-01-12T15:52:21.880Z\"\n        },\n        {\n            \"id\": \"19504207-81f0-4bff-a441-bec43866c516\",\n            \"name\": \"Land\",\n            \"created_at\": \"2026-01-12T15:52:21.942Z\"\n        },\n        {\n            \"id\": \"bbd3cec4-32ad-4008-8796-e3a7b2508b9e\",\n            \"name\": \"Townhouse\",\n            \"created_at\": \"2026-01-12T15:52:21.929Z\"\n        }\n    ],\n    \"meta\": {\n        \"current_page\": 1,\n        \"per_page\": 25,\n        \"total_pages\": 1,\n        \"total_count\": 6\n    }\n}"
+						}
+					]
 				},
 				{
 					"name": "Get Category by ID",
@@ -678,7 +1531,99 @@
 						},
 						"description": "Create a new category. Requires authentication."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Create Category",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"category\": {\n    \"name\": \"Residential\"\n  }\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/api/v1/categories",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"categories"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "x-frame-options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "x-xss-protection",
+									"value": "0"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "x-permitted-cross-domain-policies",
+									"value": "none"
+								},
+								{
+									"key": "referrer-policy",
+									"value": "strict-origin-when-cross-origin"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "vary",
+									"value": "Accept, Origin"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"db8b30e88a9e984791838cf3257ab724\""
+								},
+								{
+									"key": "cache-control",
+									"value": "max-age=0, private, must-revalidate"
+								},
+								{
+									"key": "x-request-id",
+									"value": "1949a6c4-83a2-4875-911a-abd0f3b33c67"
+								},
+								{
+									"key": "x-runtime",
+									"value": "0.025446"
+								},
+								{
+									"key": "server-timing",
+									"value": "start_processing.action_controller;dur=0.02, sql.active_record;dur=12.10, instantiation.active_record;dur=0.04, start_transaction.active_record;dur=0.01, transaction.active_record;dur=6.58, render.active_model_serializers;dur=0.23, process_action.action_controller;dur=20.03"
+								},
+								{
+									"key": "content-length",
+									"value": "106"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"6227b7e5-b287-4e70-9b81-824d91419360\",\n    \"name\": \"Residential\",\n    \"created_at\": \"2026-01-20T16:34:24.086Z\"\n}"
+						}
+					]
 				},
 				{
 					"name": "Update Category",
@@ -782,9 +1727,23 @@
 								"api",
 								"v1",
 								"inquiries"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Page number (default: 1)",
+									"disabled": true
+								},
+								{
+									"key": "per_page",
+									"value": "25",
+									"description": "Items per page (default: 25)",
+									"disabled": true
+								}
 							]
 						},
-						"description": "Get all inquiries. Requires authentication."
+						"description": "Get all inquiries with pagination. Requires authentication.\n\n**Pagination Parameters:**\n- `page` (number): Page number (default: 1)\n- `per_page` (number): Items per page (default: 25)\n\n**Response Format:**\nReturns paginated response with `data` array and `meta` object containing pagination information."
 					},
 					"response": []
 				},
@@ -834,22 +1793,107 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"inquiry\": {\n    \"property_id\": \"\",\n    \"name\": \"John Doe\",\n    \"email\": \"john.doe@example.com\",\n    \"phone\": \"+1234567890\",\n    \"message\": \"I'm interested in this property. Please contact me.\"\n  }\n}"
+							"raw": "{\n  \"inquiry\": {\n    \"property_id\": \"b6274c30-6078-4122-a214-0a9f58e793cb\",\n    \"name\": \"John Doe\",\n    \"email\": \"john.doe@example.com\",\n    \"phone\": \"+1234567890\",\n    \"message\": \"I'm interested in this property. Please contact me.\"\n  }\n}"
 						},
 						"url": {
-							"raw": "{{base_url}}/api/v1/inquiries",
+							"raw": "{{base_url}}/v1/inquiries",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"api",
 								"v1",
 								"inquiries"
 							]
 						},
 						"description": "Create a new inquiry for a property. No authentication required."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Create Inquiry",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"inquiry\": {\n    \"property_id\": \"6fa299a7-557e-4263-861e-7e7b06468ebf\",\n    \"name\": \"John Doe\",\n    \"email\": \"john.doe@example.com\",\n    \"phone\": \"+1234567890\",\n    \"message\": \"I'm interested in this property. Please contact me.\"\n  }\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/v1/inquiries",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"v1",
+										"inquiries"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "x-frame-options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "x-xss-protection",
+									"value": "0"
+								},
+								{
+									"key": "x-content-type-options",
+									"value": "nosniff"
+								},
+								{
+									"key": "x-permitted-cross-domain-policies",
+									"value": "none"
+								},
+								{
+									"key": "referrer-policy",
+									"value": "strict-origin-when-cross-origin"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "vary",
+									"value": "Accept, Origin"
+								},
+								{
+									"key": "etag",
+									"value": "W/\"abb707eeb4dcd8148130f69af9841648\""
+								},
+								{
+									"key": "cache-control",
+									"value": "max-age=0, private, must-revalidate"
+								},
+								{
+									"key": "x-request-id",
+									"value": "e422a871-b851-4712-ac5d-947a7665e448"
+								},
+								{
+									"key": "x-runtime",
+									"value": "0.071004"
+								},
+								{
+									"key": "server-timing",
+									"value": "start_processing.action_controller;dur=0.02, sql.active_record;dur=30.98, start_transaction.active_record;dur=0.02, instantiation.active_record;dur=0.22, transaction.active_record;dur=30.21, render.active_model_serializers;dur=1.33, process_action.action_controller;dur=54.88"
+								},
+								{
+									"key": "content-length",
+									"value": "715"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"e5de832e-c5d8-4b73-85b8-020cc804e119\",\n    \"property_id\": \"6fa299a7-557e-4263-861e-7e7b06468ebf\",\n    \"name\": \"John Doe\",\n    \"email\": \"john.doe@example.com\",\n    \"phone\": \"+1234567890\",\n    \"message\": \"I'm interested in this property. Please contact me.\",\n    \"created_at\": \"2026-01-20T21:36:25.737Z\",\n    \"property\": {\n        \"id\": \"6fa299a7-557e-4263-861e-7e7b06468ebf\",\n        \"title\": \"Beautiful Modern House\",\n        \"description\": \"Spacious 3-bedroom house with modern amenities\",\n        \"address\": \"123 Main Street, Downtown\",\n        \"price\": 350000,\n        \"bedrooms\": 3,\n        \"bathrooms\": 2,\n        \"area\": 2000,\n        \"property_type\": \"house\",\n        \"status\": \"available\",\n        \"featured\": true,\n        \"created_at\": \"2026-01-20T16:32:03.693Z\",\n        \"updated_at\": \"2026-01-20T16:32:03.693Z\",\n        \"created_by\": \"2486b80d-39f1-4e2f-ba13-95aa7ca86e3b\"\n    }\n}"
+						}
+					]
 				}
 			],
 			"description": "Inquiry management endpoints"
@@ -913,30 +1957,6 @@
 				}
 			],
 			"description": "Contact information endpoints"
-		},
-		{
-			"name": "Health Check",
-			"item": [
-				{
-					"name": "Health Check",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}/up",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"up"
-							]
-						},
-						"description": "Health check endpoint to verify API is running."
-					},
-					"response": []
-				}
-			],
-			"description": "System health check endpoint"
 		}
 	],
 	"event": [
@@ -962,13 +1982,11 @@
 	"variable": [
 		{
 			"key": "base_url",
-			"value": "http://localhost:3000",
-			"type": "string"
+			"value": "https://abo-hedeya.mavoid.com/api"
 		},
 		{
 			"key": "auth_token",
-			"value": "",
-			"type": "string"
+			"value": ""
 		}
 	]
 }
